@@ -1,4 +1,4 @@
-package com.bov.petclinic;
+package com.bov.petclinic.entity;
 
 import lombok.Data;
 

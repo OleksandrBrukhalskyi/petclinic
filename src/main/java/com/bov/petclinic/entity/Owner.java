@@ -1,5 +1,6 @@
-package com.bov.petclinic;
+package com.bov.petclinic.entity;
 
+import com.bov.petclinic.entity.Pet;
 import lombok.Data;
 
 import javax.persistence.*;
