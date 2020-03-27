@@ -15,8 +15,8 @@ public class Pet {
     private String name;
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
-    @Column(name = "type")
-    private String type;
+    @Column(name ="breed")
+    private String breed;
     @ManyToOne
     private Owner owner;
 }
