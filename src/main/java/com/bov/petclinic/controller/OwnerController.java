@@ -5,7 +5,6 @@ import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.repository.PetRepository;
 import com.bov.petclinic.service.OwnerService;
-import com.bov.petclinic.service.PetService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
