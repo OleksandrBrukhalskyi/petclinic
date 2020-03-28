@@ -1,4 +1,4 @@
-package com.bov.petclinic;
+package com.bov.petclinic.service;
 
 import com.bov.petclinic.entity.Owner;
 import org.springframework.stereotype.Service;
