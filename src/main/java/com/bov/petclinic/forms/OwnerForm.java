@@ -1,4 +1,4 @@
-package com.bov.petclinic;
+package com.bov.petclinic.forms;
 
 import com.bov.petclinic.entity.Pet;
 import lombok.Getter;
