@@ -6,7 +6,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "owners")
+@Entity
+@Table(name = "owners")
 @Data
 public class Owner {
     @Id
