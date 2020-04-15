@@ -3,9 +3,12 @@ package com.bov.petclinic.controller;
 import com.bov.petclinic.forms.OwnerForm;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
+import com.bov.petclinic.repository.OwnerRepository;
 import com.bov.petclinic.repository.PetRepository;
 import com.bov.petclinic.service.OwnerService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @RequestMapping("/api/owner")
 public class OwnerController {
 
@@ -24,7 +28,8 @@ public class OwnerController {
     private OwnerService ownerService;
     @Autowired
     private PetRepository petRepository;
-
+    @Autowired
+    private OwnerRepository ownerRepository;
     @PostMapping("/add")
     public ResponseEntity<Owner> create(@Valid @RequestBody OwnerForm ownerForm){
         Owner owner = new Owner();
@@ -32,9 +37,10 @@ public class OwnerController {
         owner.setFirstname(ownerForm.getFirstname());
         owner.setPatronymic(ownerForm.getPatronymic());
         owner.setAddress(ownerForm.getAddress());
-        Pet pet = petRepository.findById(ownerForm.getPet())
-                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
-        owner.setPets(Collections.singletonList(pet));
+        owner.setPhoneNumber(ownerForm.getPhoneNumber());
+//        Pet pet = petRepository.findById(ownerForm.getPet())
+//                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
+//        owner.setPets(Collections.singletonList(pet));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ownerService.create(owner));
     }
@@ -45,9 +51,9 @@ public class OwnerController {
         owner.setFirstname(ownerForm.getFirstname());
         owner.setPatronymic(ownerForm.getPatronymic());
         owner.setAddress(ownerForm.getAddress());
-        Pet pet = petRepository.findById(ownerForm.getPet())
-                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
-        owner.setPets(Collections.singletonList(pet));
+//        Pet pet = petRepository.findById(ownerForm.getPet())
+//                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
+//        owner.setPets(Collections.singletonList(pet));
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ownerService.update(owner));
     }
