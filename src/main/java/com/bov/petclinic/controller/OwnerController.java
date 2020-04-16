@@ -26,10 +26,7 @@ public class OwnerController {
 
     @Autowired
     private OwnerService ownerService;
-    @Autowired
-    private PetRepository petRepository;
-    @Autowired
-    private OwnerRepository ownerRepository;
+
     @PostMapping("/add")
     public ResponseEntity<Owner> create(@Valid @RequestBody OwnerForm ownerForm){
         Owner owner = new Owner();
