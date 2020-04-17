@@ -29,7 +29,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet getById(Long id) {
-        log.info("Pet found by this id:",id);
+        log.info("Pet found by this id:" + id);
         return petRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 
