@@ -35,9 +35,6 @@ public class OwnerController {
         owner.setPatronymic(ownerForm.getPatronymic());
         owner.setAddress(ownerForm.getAddress());
         owner.setPhoneNumber(ownerForm.getPhoneNumber());
-//        Pet pet = petRepository.findById(ownerForm.getPet())
-//                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
-//        owner.setPets(Collections.singletonList(pet));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ownerService.create(owner));
     }
@@ -48,9 +45,6 @@ public class OwnerController {
         owner.setFirstname(ownerForm.getFirstname());
         owner.setPatronymic(ownerForm.getPatronymic());
         owner.setAddress(ownerForm.getAddress());
-//        Pet pet = petRepository.findById(ownerForm.getPet())
-//                .orElseThrow(() -> new RuntimeException("Pet does not exist"));
-//        owner.setPets(Collections.singletonList(pet));
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ownerService.update(owner));
     }
