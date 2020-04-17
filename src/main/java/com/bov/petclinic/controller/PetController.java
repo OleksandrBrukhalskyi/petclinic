@@ -3,7 +3,6 @@ package com.bov.petclinic.controller;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.forms.PetForm;
-import com.bov.petclinic.repository.OwnerRepository;
 import com.bov.petclinic.service.OwnerService;
 import com.bov.petclinic.service.PetService;
 import lombok.AllArgsConstructor;
@@ -27,7 +26,7 @@ public class PetController {
 
     @PostMapping("/add")
     public ResponseEntity<Pet> create(@Valid @RequestBody PetForm petForm){
-        Owner owner = ownerService.getById(petForm.getId());
+        Owner owner = ownerService.getById(petForm.getOwner());
         Pet pet = new Pet();
         pet.setName(petForm.getName());
         pet.setBreed(petForm.getBreed());
@@ -39,7 +38,7 @@ public class PetController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm , @PathVariable("id") Long id){
+    public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm, @PathVariable("id") Long id){
         Owner owner = ownerService.getById(petForm.getId());
         Pet pet = new Pet();
         pet.setName(petForm.getName());
