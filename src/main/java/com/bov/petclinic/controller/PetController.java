@@ -39,7 +39,7 @@ public class PetController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm ,@PathVariable("id") Long id){
+    public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm , @PathVariable("id") Long id){
         Owner owner = ownerService.getById(petForm.getId());
         Pet pet = new Pet();
         pet.setName(petForm.getName());
