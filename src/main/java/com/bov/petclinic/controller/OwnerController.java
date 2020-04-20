@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/api/owner")
+@CrossOrigin("*")
 public class OwnerController {
 
     @Autowired
@@ -33,18 +34,19 @@ public class OwnerController {
         owner.setSurname(ownerForm.getSurname());
         owner.setFirstname(ownerForm.getFirstname());
         owner.setPatronymic(ownerForm.getPatronymic());
-        owner.setAddress(ownerForm.getAddress());
+        owner.setHomeAddress(ownerForm.getHomeAddress());
         owner.setPhoneNumber(ownerForm.getPhoneNumber());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ownerService.create(owner));
     }
     @PutMapping("/{id}")
     public ResponseEntity<Owner> update(@Valid @RequestBody OwnerForm ownerForm, @PathVariable("id") Long id){
-        Owner owner = new Owner();
+        Owner owner = ownerService.getById(id);
         owner.setSurname(ownerForm.getSurname());
         owner.setFirstname(ownerForm.getFirstname());
         owner.setPatronymic(ownerForm.getPatronymic());
-        owner.setAddress(ownerForm.getAddress());
+        owner.setHomeAddress(ownerForm.getHomeAddress());
+        owner.setPhoneNumber(ownerForm.getPhoneNumber());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ownerService.update(owner));
     }
