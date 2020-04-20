@@ -15,7 +15,7 @@ public class OwnerForm {
     private String surname;
     private String firstname;
     private String patronymic;
-    private String address;
+    private String homeAddress;
     private String phoneNumber;
     private Long pet;
 }
