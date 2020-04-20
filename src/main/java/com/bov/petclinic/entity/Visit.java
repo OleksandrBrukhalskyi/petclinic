@@ -18,8 +18,8 @@ public class Visit {
     private Date visitDate;
     @Column(name = "goal_of_visit")
     private String goalOfVisit;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pet pet;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
 }
