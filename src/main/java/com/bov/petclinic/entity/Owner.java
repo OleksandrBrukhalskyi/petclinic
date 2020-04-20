@@ -18,10 +18,9 @@ public class Owner {
     private String firstname;
     @Column(name = "patronymic")
     private String patronymic;
-    @Column(name = "address")
-    private String address;
+    @Column(name = "homeAddress")
+    private String homeAddress;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @OneToMany
-    private List<Pet> pets;
+
 }
