@@ -18,6 +18,6 @@ public class Pet {
     private Date dateOfBirth;
     @Column(name ="breed")
     private String breed;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
 }
