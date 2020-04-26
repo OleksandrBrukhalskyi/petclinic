@@ -5,6 +5,7 @@ import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.forms.PetForm;
 import com.bov.petclinic.service.OwnerService;
 import com.bov.petclinic.service.PetService;
+import com.bov.petclinic.service.impls.OwnerServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +40,8 @@ public class PetController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm, @PathVariable("id") Long id){
-        Owner owner = ownerService.getById(petForm.getId());
-        Pet pet = new Pet();
+        Owner owner = ownerService.getById(petForm.getOwner());
+        Pet pet = petService.getById(id);
         pet.setName(petForm.getName());
         pet.setBreed(petForm.getBreed());
         pet.setDateOfBirth(petForm.getDateOfBirth());
