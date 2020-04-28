@@ -1,4 +1,5 @@
 package com.bov.petclinic.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Pet {
     private Date dateOfBirth;
     @Column(name ="breed")
     private String breed;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
 }
