@@ -12,4 +12,6 @@ public class PetDto {
     private String name;
     private Date dateOfBirth;
     private String breed;
+
+
 }
