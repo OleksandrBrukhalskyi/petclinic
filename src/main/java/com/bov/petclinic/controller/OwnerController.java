@@ -1,5 +1,6 @@
 package com.bov.petclinic.controller;
 
+import com.bov.petclinic.dto.OwnerDto;
 import com.bov.petclinic.forms.OwnerForm;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
@@ -26,24 +27,16 @@ import java.util.List;
 public class OwnerController {
 
     private OwnerService ownerService;
-    private ModelMapper modelMapper;
 
     @Autowired
-    public OwnerController(OwnerService ownerService, ModelMapper modelMapper) {
+    public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Owner> create(@Valid @RequestBody OwnerForm ownerForm){
-        Owner owner = new Owner();
-        owner.setSurname(ownerForm.getSurname());
-        owner.setFirstname(ownerForm.getFirstname());
-        owner.setPatronymic(ownerForm.getPatronymic());
-        owner.setHomeAddress(ownerForm.getHomeAddress());
-        owner.setPhoneNumber(ownerForm.getPhoneNumber());
+    public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ownerService.create(owner));
+                .body(ownerService.create(ownerDto));
     }
     @PutMapping("/{id}")
     public ResponseEntity<Owner> update(@Valid @RequestBody OwnerForm ownerForm, @PathVariable("id") Long id){
