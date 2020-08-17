@@ -9,6 +9,7 @@ import com.bov.petclinic.service.OwnerService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,14 @@ import java.util.List;
 @CrossOrigin("*")
 public class OwnerController {
 
-    @Autowired
     private OwnerService ownerService;
+    private ModelMapper modelMapper;
+
+    @Autowired
+    public OwnerController(OwnerService ownerService, ModelMapper modelMapper) {
+        this.ownerService = ownerService;
+        this.modelMapper = modelMapper;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Owner> create(@Valid @RequestBody OwnerForm ownerForm){
