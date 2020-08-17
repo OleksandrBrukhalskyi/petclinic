@@ -1,6 +1,7 @@
 package com.bov.petclinic.entity;
 
-import com.bov.petclinic.entity.Pet;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
@@ -22,5 +23,8 @@ public class Owner {
     private String homeAddress;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
+    private List<Pet> pets;
 
 }
