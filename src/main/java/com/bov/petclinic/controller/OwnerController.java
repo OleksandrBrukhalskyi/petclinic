@@ -34,6 +34,11 @@ public class OwnerController {
     }
 
 
+    @PostMapping("/add")
+    public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ownerService.create(ownerDto));
+    }
     @PutMapping("/{id}")
     public ResponseEntity<Owner> update(@Valid @RequestBody OwnerForm ownerForm, @PathVariable("id") Long id){
         Owner owner = ownerService.getById(id);
