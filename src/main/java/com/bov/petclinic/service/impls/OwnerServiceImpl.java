@@ -1,9 +1,11 @@
 package com.bov.petclinic.service.impls;
 
+import com.bov.petclinic.dto.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.repository.OwnerRepository;
 import com.bov.petclinic.service.OwnerService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +14,25 @@ import java.util.List;
 @Service
 @Slf4j
 public class OwnerServiceImpl implements OwnerService {
-    @Autowired
+
     private OwnerRepository ownerRepository;
+    private ModelMapper modelMapper;
+    @Autowired
+    public OwnerServiceImpl(OwnerRepository ownerRepository, ModelMapper modelMapper) {
+        this.ownerRepository = ownerRepository;
+        this.modelMapper = modelMapper;
+    }
+
     @Override
-    public Owner create(Owner owner) {
+    public OwnerDto create(OwnerDto ownerDto) {
         log.info("Owner created");
-        return ownerRepository.save(owner);
+        Owner owner = modelMapper.map(ownerDto, Owner.class);
+        owner.setSurname(ownerDto.getSurname());
+        owner.setFirstname(ownerDto.getFirstname());
+        owner.setPatronymic(ownerDto.getPatronymic());
+        owner.setHomeAddress(ownerDto.getHomeAddress());
+        owner.setPhoneNumber(ownerDto.getNumber());
+        return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
 
     @Override
