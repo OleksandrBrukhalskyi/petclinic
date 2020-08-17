@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/api/owner")
 @CrossOrigin("*")
