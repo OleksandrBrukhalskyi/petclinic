@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OwnerDto {
+    private Long id;
     private String surname;
     private String firstname;
     private String patronymic;
