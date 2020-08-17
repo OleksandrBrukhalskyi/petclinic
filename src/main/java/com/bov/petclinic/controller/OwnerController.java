@@ -27,13 +27,12 @@ import java.util.List;
 public class OwnerController {
 
     private OwnerService ownerService;
-    private ModelMapper modelMapper;
 
     @Autowired
-    public OwnerController(OwnerService ownerService, ModelMapper modelMapper) {
+    public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
-        this.modelMapper = modelMapper;
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto) {
