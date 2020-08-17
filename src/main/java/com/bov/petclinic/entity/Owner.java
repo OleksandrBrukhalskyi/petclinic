@@ -23,7 +23,7 @@ public class Owner {
     private String homeAddress;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
     private List<Pet> pets;
 
