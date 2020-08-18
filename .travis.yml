@@ -19,7 +19,6 @@ script:
 dist: xenial
 sudo: required
 language: java
-
 services:
   - postgresql
 before_script:
