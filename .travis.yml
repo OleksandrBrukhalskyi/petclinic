@@ -18,7 +18,8 @@ script:
 
 before_install:
   - chmod +x mvnw
-  - sudo systemctl start postgresql@11-main
+  - sudo systemctl start postgresql
+  - sudo find /tmp/ -name .s.PGSQL.5432
 before_script:
   - psql -c 'create database petclinic;' -U postgres
 services:
