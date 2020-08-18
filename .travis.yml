@@ -3,6 +3,7 @@ addons:
     organization: "alexbru"
     token:
       secure: "GpzjfirC-Auf8RCezMb7wQ" # encrypted value of your token
+
 postgresql: "12"
   apt:
     packages:
