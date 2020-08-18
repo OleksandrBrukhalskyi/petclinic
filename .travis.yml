@@ -14,12 +14,7 @@ script:
 
 before_install:
   - chmod +x mvnw
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
   - sudo systemctl enable postgresql
-  - sudo systemctl start postgres
 before_script:
   - psql -c 'create database petclinic' -U postgres
 services:
