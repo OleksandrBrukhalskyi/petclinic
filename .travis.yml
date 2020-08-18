@@ -6,19 +6,11 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-sonarcloud:
-  organization: "alexbru"
-  token:
-    secure: "bb39694648cee593d486ecb766be4cd2350ec3d9" # encrypted value of your token
 postgresql: "12"
   apt:
     packages:
       - postgresql-12
       - postgresql-client-12
-  env:
-    global:
-      - PGUSER=postgres
-      - PGPORT=5432
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic
@@ -26,3 +18,7 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database petclinic;' -U postgres
+env:
+  global:
+    - PGUSER=postgres
+    - PGPORT=5432
