@@ -14,7 +14,7 @@ sonarcloud:
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  -  mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic -Dsonar.organization=alexbru -Dsonar.host=https://sonarcloud.io
+  -  mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic -Dsonar.organization=alexbru -Dsonar.host=https://sonarcloud.io -Dsonar.login=d4a61732ecc7b8523b6c35f08fdd7171d6c368e0
 
 before_install:
   - chmod +x mvnw
