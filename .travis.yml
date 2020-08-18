@@ -1,11 +1,11 @@
 language: java
 sudo: true
-dist: bionic
-jdk: oraclejdk8
+dist: trusty
+jdk: oraclejdk9
 addons:
   apt:
     packages:
-      -oracle-java8-installer
+      -oracle-java9-installer
 before_install:
   - chmod +x mvnw
 postgresql: "12"
