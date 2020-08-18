@@ -6,7 +6,6 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-
 sonarcloud:
   organization: "alexbru"
   token:
@@ -16,10 +15,10 @@ postgresql: "12"
     packages:
       - postgresql-12
       - postgresql-client-12
-env:
-  global:
-    - PGUSER=postgres
-    - PGPORT=5432
+  env:
+    global:
+      - PGUSER=postgres
+      - PGPORT=5432
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic
