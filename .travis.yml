@@ -19,7 +19,8 @@ before_install:
   - sudo apt-get install -y postgresql-11 postgresql-client-11
   - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
   - sudo service postgresql restart 11
-  - cat /var/run/postgresql/.s.PGSQL.5432
+  - sudo mkdir /var/pgsql_socket
+  - sudo ln /tmp/.s.PGSQL.5432 /var/pgsql_socket/
 before_script:
   - psql -c 'create database petclinic' -U postgres
 services:
