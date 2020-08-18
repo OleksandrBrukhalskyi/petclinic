@@ -7,3 +7,21 @@ addons:
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic
+dist: xenial
+sudo: required
+language: java
+
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database petclinic;' -U postgres
+before_install:
+  - sudo apt-get update
+    - sudo apt-get --yes remove postgresql\*
+    - sudo apt-get install -y postgresql-12 postgresql-client-12
+    - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
+    - sudo service postgresql restart 12
+env:
+  global:
+    - PGUSER=postgres
+    - PGPORT=5432
