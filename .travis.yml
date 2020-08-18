@@ -1,5 +1,15 @@
+language: java
+sudo: true
+dist: trusty
+jdk: oraclejdk8
 addons:
- sonarcloud:
+  apt:
+    packages:
+      -oracle-java8-installer
+before_install:
+  - chmod +x mvnw
+postgresql: "12"
+sonarcloud:
     organization: "alexbru"
     token:
       secure: "q33dgzE6a1ijajE/kJ1h8+886Yw6HZQ/As5h8hlicxOCr10f5PkmiPv2JpyVknx8oyd4Wo4UPintqw5PCdoGnK4hSGf5IMa/OtjjJ1FpqCQ/KugYEgflbxFSGO1O7b28TggTXt91krHI1gOCIrEpU59WfvQe9mqA1aPtI5ptAJaalwlSeLaW9KWA1Z0UUZyCrHLcq9H/SGhd4HSh7arcH0iFsXxJcfq5EXNT2WE8DOjyW6sFQyomORX72pxGLHObtGZFlEVDhQb51/1kozfgjebjsIk87zo3EiSYJRM0QRgDye1u7DBbvEqBnT9M+TJNtHTXxiEMIAMc/COfBkulUgxmDh6t7TJzZcVPMhOOBGwr67XzRCAM3ayPgfIxpNqIyP8CchuRJhcG4D4UTNAQeBia7dOw3F4GhlpV3plIuui6d4qSI+O7ZVQmXx3U+MaSdn/7q2DqqCN3Ceux04MDKvdEI19ymAA8Vwe6MaE2rrYpVpBR3PXtd6K+hSSy/fnK2XOzvzMMY5ltubfcmjRmhMB0tY9LR2RyNyBb3oaAGvOE3SKqlQvnjeDKvCFPtFG5GR1pfpxDvxdNrMhzDngOT3PYZw1iXyapB3kzcLDsPJ4AZk9M6CqDBaNtNPfvXRGPbPBq+KP/zbUjcnnD0p1Rkt/20l9gPYK1IqpRoSELTOU=" # encrypted value of your token
@@ -10,7 +20,8 @@ script:
 
 before_script:
   - psql -c 'create database petclinic' -U postgres
-
+services:
+  - postgresql
 env:
   global:
     - PGUSER=postgres
