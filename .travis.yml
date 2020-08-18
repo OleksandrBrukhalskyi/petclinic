@@ -1,4 +1,6 @@
+language: java
 addons:
+ postgresql: "12"
  sonarcloud:
     organization: "alexbru"
     token:
@@ -10,7 +12,8 @@ script:
 
 before_script:
   - psql -c 'create database petclinic' -U postgres
-
+services:
+  - postgresql
 env:
   global:
     - PGUSER=postgres
