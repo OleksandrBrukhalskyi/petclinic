@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -36,9 +37,17 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner update(Owner owner) {
+    public OwnerDto update(OwnerDto ownerDto, Long id) {
         log.info("Owner updated");
-        return ownerRepository.save(owner);
+        Owner owner = ownerRepository.findById(id)
+                .orElse(null);
+        owner.setSurname(ownerDto.getSurname());
+        owner.setFirstname(ownerDto.getFirstname());
+        owner.setPatronymic(ownerDto.getPatronymic());
+        owner.setHomeAddress(ownerDto.getHomeAddress());
+        owner.setPhoneNumber(ownerDto.getNumber());
+
+        return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
 
     @Override
