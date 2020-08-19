@@ -10,11 +10,11 @@ addons:
 sonarcloud:
     organization: "alexbru"
     token:
-      secure:  $SONAR_TOKEN # encrypted value of your token
+      secure: "YMn1g/6dbEUmiEABKGstYee7JxSe4O6hsCwVNhvEa+ohGAJEvrgWh0JOpSEjZ2u5c4DGj2g8QjWs06JqrcwhztlaweIKY417ym/rR9i+Amp/kpS8MXml+WxmwrJaNtsIoD+3i92/ux4KWcdrkRPKoHb8TZOD2d6Al0BHahlh1qbYQrTwRBHJ+3st7xx9dxMd/Vh+tuZPrP0MvnO98SlQNtxa5Yqv9dnuPl+g3qpQIaVG9zJLyJigLls1VZIh8MnPMl8XQgZjyN4f7Ug+RN3raG5r9c47U+l3JC9nXeRFtDVi5BamIqaEUcIfPp+MJ+N3JDaAx6C2j7LlBtTmhCDa5WtiF6F5otKPmgSzSRUe0rrgQsahsNuVbLe+/Ws5OVHy0OPGeyC456BdbUh1p0IC6Qj2qA4iqUM2yNsXcJ2Sg0vjslGbicll8sYLEuCLQRmXrXqr9BHAa1v7TBleRzyI6ePcBcBXslzTgg8Kz8P8YMHzOVzU5KC97dCovz0R2iecifj8/8F9k60ASrG7ls7yhU3ntVXjHGlzzC/Hl/5KLuJ93t/mR6Mq2aSB3x41OOBkwNaF0ie/6A8xHsKKw1Dx+DvR93oVY+XF+vFFA+YLlLFdA/Ze7hF9a2737AyB6toemB2lHfDlRCkvuOmJiDoQVcbZbeEc6Uzt/oQlWxDL5m0=" # encrypted value of your token
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  -  mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic -Dsonar.organization=alexbru -Dsonar.host=https://sonarcloud.io -Dsonar.login=d4a61732ecc7b8523b6c35f08fdd7171d6c368e0
+  -  mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=OleksandrBrukhalskyi_petclinic -Dsonar.organization=alexbru -Dsonar.host=https://sonarcloud.io -Dsonar.login=058797318462deec7373ad4546a872cdfff8cea0
 
 before_install:
   - chmod +x mvnw
