@@ -40,7 +40,7 @@ public class OwnerServiceImpl implements OwnerService {
     public OwnerDto update(OwnerDto ownerDto, Long id) {
         log.info("Owner updated");
         Owner owner = ownerRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(RuntimeException::new);
         owner.setSurname(ownerDto.getSurname());
         owner.setFirstname(ownerDto.getFirstname());
         owner.setPatronymic(ownerDto.getPatronymic());
