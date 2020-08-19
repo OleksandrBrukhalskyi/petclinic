@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface OwnerService {
     OwnerDto create(OwnerDto ownerDto);
-    Owner update(Owner owner);
+    OwnerDto update(OwnerDto ownerDto, Long id);
     Owner getById(Long id);
     void delete(Long id);
     List<Owner> getAll();
