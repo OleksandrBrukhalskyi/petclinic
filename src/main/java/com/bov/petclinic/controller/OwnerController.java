@@ -60,9 +60,8 @@ public class OwnerController {
         return ownerService.getAll();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id){
+    public Long delete(@PathVariable("id") Long id){
         ownerService.delete(id);
-        return ResponseEntity.ok().build();
     }
 
 }
