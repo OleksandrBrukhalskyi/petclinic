@@ -40,15 +40,15 @@ public class OwnerController {
                 .body(ownerService.create(ownerDto));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Owner> update(@Valid @RequestBody OwnerForm ownerForm, @PathVariable("id") Long id){
+    public ResponseEntity<OwnerDto> update(@Valid @RequestBody OwnerDto ownerDto, @PathVariable("id") Long id){
         Owner owner = ownerService.getById(id);
-        owner.setSurname(ownerForm.getSurname());
-        owner.setFirstname(ownerForm.getFirstname());
-        owner.setPatronymic(ownerForm.getPatronymic());
-        owner.setHomeAddress(ownerForm.getHomeAddress());
-        owner.setPhoneNumber(ownerForm.getPhoneNumber());
+        owner.setSurname(ownerDto.getSurname());
+        owner.setFirstname(ownerDto.getFirstname());
+        owner.setPatronymic(ownerDto.getPatronymic());
+        owner.setHomeAddress(ownerDto.getHomeAddress());
+        owner.setPhoneNumber(ownerDto.getNumber());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ownerService.update(owner));
+                .body(ownerService.update(ownerDto, id));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Owner> getById(@PathVariable("id") Long id){
