@@ -14,5 +14,5 @@ public class PetDtoResponse {
     private String name;
     private Date dateOfBirth;
     private String breed;
-    private Owner owner;
+    private OwnerDto owner;
 }
