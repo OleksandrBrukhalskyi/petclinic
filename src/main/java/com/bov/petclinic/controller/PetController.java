@@ -23,10 +23,14 @@ import java.util.List;
 @CrossOrigin("*")
 public class PetController {
 
+    private final PetService petService;
+    private final OwnerService ownerService;
+
     @Autowired
-    private PetService petService;
-    @Autowired
-    private OwnerService ownerService;
+    public PetController(PetService petService, OwnerService ownerService) {
+        this.petService = petService;
+        this.ownerService = ownerService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<PetDtoResponse> create(@Valid @RequestBody PetDtoRequest petDtoRequest){
