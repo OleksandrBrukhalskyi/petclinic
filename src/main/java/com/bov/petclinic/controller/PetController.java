@@ -1,5 +1,7 @@
 package com.bov.petclinic.controller;
 
+import com.bov.petclinic.dto.PetDtoRequest;
+import com.bov.petclinic.dto.PetDtoResponse;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.forms.PetForm;
@@ -27,16 +29,9 @@ public class PetController {
     private OwnerService ownerService;
 
     @PostMapping("/add")
-    public ResponseEntity<Pet> create(@Valid @RequestBody PetForm petForm){
-        Owner owner = ownerService.getById(petForm.getOwner());
-        Pet pet = new Pet();
-        pet.setName(petForm.getName());
-        pet.setBreed(petForm.getBreed());
-        pet.setDateOfBirth(petForm.getDateOfBirth());
-        pet.setOwner(owner);
-
+    public ResponseEntity<PetDtoResponse> create(@Valid @RequestBody PetDtoRequest petDtoRequest){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.create(pet));
+                .body(petService.create(petDtoRequest));
 
     }
     @PutMapping("/{id}")
