@@ -1,23 +1,15 @@
 package com.bov.petclinic.controller;
 
 import com.bov.petclinic.dto.OwnerDto;
-import com.bov.petclinic.forms.OwnerForm;
 import com.bov.petclinic.entity.Owner;
-import com.bov.petclinic.entity.Pet;
-import com.bov.petclinic.repository.OwnerRepository;
-import com.bov.petclinic.repository.PetRepository;
 import com.bov.petclinic.service.OwnerService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
