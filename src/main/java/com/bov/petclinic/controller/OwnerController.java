@@ -46,7 +46,7 @@ public class OwnerController {
         owner.setFirstname(ownerDto.getFirstname());
         owner.setPatronymic(ownerDto.getPatronymic());
         owner.setHomeAddress(ownerDto.getHomeAddress());
-        owner.setPhoneNumber(ownerDto.getNumber());
+        owner.setPhoneNumber(ownerDto.getPhoneNumber());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ownerService.update(ownerDto, id));
     }

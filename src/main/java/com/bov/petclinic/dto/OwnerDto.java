@@ -13,5 +13,5 @@ public class OwnerDto {
     private String firstname;
     private String patronymic;
     private String homeAddress;
-    private String number;
+    private String phoneNumber;
 }
