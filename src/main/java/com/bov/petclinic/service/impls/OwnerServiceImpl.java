@@ -32,7 +32,7 @@ public class OwnerServiceImpl implements OwnerService {
         owner.setFirstname(ownerDto.getFirstname());
         owner.setPatronymic(ownerDto.getPatronymic());
         owner.setHomeAddress(ownerDto.getHomeAddress());
-        owner.setPhoneNumber(ownerDto.getNumber());
+        owner.setPhoneNumber(ownerDto.getPhoneNumber());
         return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
 
@@ -45,7 +45,7 @@ public class OwnerServiceImpl implements OwnerService {
         owner.setFirstname(ownerDto.getFirstname());
         owner.setPatronymic(ownerDto.getPatronymic());
         owner.setHomeAddress(ownerDto.getHomeAddress());
-        owner.setPhoneNumber(ownerDto.getNumber());
+        owner.setPhoneNumber(ownerDto.getPhoneNumber());
 
         return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
