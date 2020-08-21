@@ -47,9 +47,22 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet update(Pet pet) {
+    public PetDtoResponse update(PetDtoRequest petDtoRequest, Long id) {
         log.info("Pet updated!");
-        return petRepository.save(pet);
+        Pet toUpdate = modelMapper.map(petDtoRequest,Pet.class);
+        Owner owner = ownerService.getById(petDtoRequest.getOwner());
+        toUpdate.setName(petDtoRequest.getName());
+        toUpdate.setBreed(petDtoRequest.getBreed());
+        toUpdate.setDateOfBirth(petDtoRequest.getDateOfBirth());
+        toUpdate.setOwner(owner);
+        try{
+            petRepository.save(toUpdate);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return modelMapper.map(toUpdate,PetDtoResponse.class);
+
+
     }
 
     @Override
