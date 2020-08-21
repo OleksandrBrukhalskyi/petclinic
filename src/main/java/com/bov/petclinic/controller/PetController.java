@@ -38,16 +38,16 @@ public class PetController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Pet> update(@Valid @RequestBody PetForm petForm, @PathVariable("id") Long id){
-        Owner owner = ownerService.getById(petForm.getOwner());
+    public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable("id") Long id){
+        Owner owner = ownerService.getById(petDtoRequest.getOwner());
         Pet pet = petService.getById(id);
-        pet.setName(petForm.getName());
-        pet.setBreed(petForm.getBreed());
-        pet.setDateOfBirth(petForm.getDateOfBirth());
+        pet.setName(petDtoRequest.getName());
+        pet.setBreed(petDtoRequest.getBreed());
+        pet.setDateOfBirth(petDtoRequest.getDateOfBirth());
         pet.setOwner(owner);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(petService.update(pet));
+                .body(petService.update(petDtoRequest,id));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Pet> getById(@PathVariable("id") Long id){
