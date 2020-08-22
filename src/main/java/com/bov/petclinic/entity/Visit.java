@@ -2,7 +2,10 @@ package com.bov.petclinic.entity;
 
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +13,9 @@ import java.util.Date;
 @Entity
 @Table(name = "visits")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
