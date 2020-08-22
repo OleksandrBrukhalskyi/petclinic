@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -66,5 +67,13 @@ public class OwnerServiceImpl implements OwnerService {
     public List<Owner> getAll() {
         log.info("List of Owners");
         return ownerRepository.findAll();
+    }
+
+    @Override
+    public List<OwnerDto> getAllDto() {
+        return ownerRepository.findAll()
+                .stream()
+                .map(owner -> modelMapper.map(owner,OwnerDto.class))
+                .collect(Collectors.toList());
     }
 }
