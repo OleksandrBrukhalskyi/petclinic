@@ -1,4 +1,4 @@
-package com.bov.petclinic.service;
+package com.bov.petclinic;
 
 import com.bov.petclinic.dto.OwnerDto;
 import com.bov.petclinic.entity.Owner;
@@ -14,7 +14,7 @@ import org.modelmapper.ModelMapper;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OwnerServiceImplTest {
@@ -26,7 +26,7 @@ public class OwnerServiceImplTest {
     private OwnerRepository ownerRepository;
 
 
-    private final OwnerDto ownerDto = new OwnerDto(1L,"Брухальський","Олександр","Валентинович","проспект Незалежності,110","0993468123");
+    private OwnerDto ownerDto = new OwnerDto(1L,"Брухальський","Олександр","Валентинович","проспект Незалежності,110","0993468123");
     private final Owner owner = new Owner(1L,"Брухальський","Олександр","Валентинович","проспект Незалежності,110","0993468123",Collections.emptyList());
 
 
@@ -41,8 +41,8 @@ public class OwnerServiceImplTest {
 
         List<OwnerDto> dtoList = Collections.singletonList(ownerDto);
         List<Owner> ownerList = Collections.singletonList(owner);
-        when(ownerRepository.findAll()).thenReturn(ownerList);
-        when(modelMapper.map(owner,OwnerDto.class)).thenReturn(dtoList.get(0));
+        doReturn(ownerList).when(ownerRepository).findAll();
+        doReturn(dtoList.get(0)).when(modelMapper).map(owner,OwnerDto.class);
         assertEquals(dtoList,ownerService.getAllDto());
     }
     @Test
@@ -57,4 +57,14 @@ public class OwnerServiceImplTest {
         when(ownerRepository.save(owner)).thenReturn(owner);
         assertEquals(ownerDto,ownerService.create(ownerDto));
     }
+    @Test
+    public void delete(){
+        doNothing().when(ownerRepository).deleteById(1L);
+        when(ownerRepository.findById(anyLong()))
+                .thenReturn(Optional.of(owner));
+        ownerService.delete(1L);
+        verify(ownerRepository,times(1)).deleteById(1L);
+    }
+
+
 }
