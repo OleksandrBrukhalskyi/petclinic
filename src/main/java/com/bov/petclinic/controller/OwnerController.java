@@ -29,12 +29,23 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-
+    @ApiOperation(value = "Save owners")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
+    })
     @PostMapping("/add")
     public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ownerService.create(ownerDto));
     }
+    @ApiOperation(value = "Update owner")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<OwnerDto> update(@Valid @RequestBody OwnerDto ownerDto, @PathVariable("id") Long id){
         Owner owner = ownerService.getById(id);
@@ -46,6 +57,12 @@ public class OwnerController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ownerService.update(ownerDto, id));
     }
+    @ApiOperation("Get owner by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Owner> getById(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.FOUND)
@@ -61,6 +78,12 @@ public class OwnerController {
     public List<Owner> getAll(){
         return ownerService.getAll();
     }
+    @ApiOperation(value = "Delete owner")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
+    })
     @DeleteMapping("/{id}")
     public Long delete(@PathVariable("id") Long id){
         ownerService.delete(id);
