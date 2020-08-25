@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @NoArgsConstructor
 @RequestMapping("/api/owner")
-@CrossOrigin("*")
+@CrossOrigin("4200")
 public class OwnerController {
 
     private OwnerService ownerService;
