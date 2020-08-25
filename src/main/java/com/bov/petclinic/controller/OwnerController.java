@@ -1,8 +1,12 @@
 package com.bov.petclinic.controller;
 
+import com.bov.petclinic.constant.HttpStatuses;
 import com.bov.petclinic.dto.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.service.OwnerService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,6 +51,12 @@ public class OwnerController {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .body(ownerService.getById(id));
     }
+    @ApiOperation(value = "Get all owners.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN),
+    })
     @GetMapping
     public List<Owner> getAll(){
         return ownerService.getAll();
