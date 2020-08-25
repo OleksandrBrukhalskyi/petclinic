@@ -1,10 +1,8 @@
 package com.bov.petclinic.dto;
 
-import com.bov.petclinic.entity.Owner;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Data
 @NoArgsConstructor

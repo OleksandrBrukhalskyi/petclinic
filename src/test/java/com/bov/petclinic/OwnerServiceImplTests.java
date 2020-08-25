@@ -10,14 +10,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-
-@RunWith(MockitoJUnitRunner.class)
-public class OwnerServiceImplTest {
+@SpringBootTest
+@RunWith(MockitoJUnitRunner.Silent.class)
+public class OwnerServiceImplTests {
     @InjectMocks
     private OwnerServiceImpl ownerService;
     @Mock
