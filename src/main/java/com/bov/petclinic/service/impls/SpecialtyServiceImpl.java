@@ -4,7 +4,6 @@ import com.bov.petclinic.entity.Specialty;
 import com.bov.petclinic.repository.SpecialtyRepository;
 import com.bov.petclinic.service.SpecialtyService;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
