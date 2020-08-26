@@ -55,7 +55,7 @@ public class SpecialtyController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Specialty> getById(@RequestParam("id") Long id){
+    public ResponseEntity<Specialty> getById(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.FOUND)
                 .body(specialtyService.getById(id));
     }
