@@ -1,4 +1,4 @@
-package com.bov.petclinic;
+package com.bov.petclinic.service;
 
 import com.bov.petclinic.dto.OwnerDto;
 import com.bov.petclinic.entity.Owner;
