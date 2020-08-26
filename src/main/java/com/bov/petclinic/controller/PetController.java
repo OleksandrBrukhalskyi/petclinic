@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pet")
-@CrossOrigin("*")
+@CrossOrigin("4200")
 public class PetController {
 
     private final PetService petService;
