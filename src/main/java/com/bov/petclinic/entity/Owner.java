@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,8 +32,9 @@ public class Owner {
     private String homeAddress;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "owner")
     @JsonManagedReference
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Pet> pets;
 
 }

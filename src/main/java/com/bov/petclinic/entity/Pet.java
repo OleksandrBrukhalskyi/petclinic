@@ -1,13 +1,10 @@
 package com.bov.petclinic.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -30,6 +27,7 @@ public class Pet {
     private String breed;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     @JsonBackReference
     private Owner owner;
 }
