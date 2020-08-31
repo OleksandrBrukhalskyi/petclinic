@@ -44,7 +44,7 @@ public class SpecialtyController {
     @PutMapping("/{id}")
     public ResponseEntity<Specialty> update(@Valid @RequestBody Specialty specialty, @PathVariable("id") Long id){
         Specialty returnedSpecialtyById = specialtyService.getById(id);
-        returnedSpecialtyById.setSpecialty(specialty.getSpecialty());
+        returnedSpecialtyById.setName(specialty.getName());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(specialtyService.update(specialty,id));
     }
