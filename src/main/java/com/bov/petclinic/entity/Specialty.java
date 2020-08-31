@@ -18,5 +18,5 @@ public class Specialty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "specialty")
-    private String specialty;
+    private String name;
 }

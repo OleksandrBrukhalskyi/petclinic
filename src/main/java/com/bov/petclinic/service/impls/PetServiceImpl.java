@@ -58,7 +58,7 @@ public class PetServiceImpl implements PetService {
         try{
             petRepository.save(toUpdate);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            log.info(e.getMessage());
         }
         return modelMapper.map(toUpdate,PetDtoResponse.class);
 
