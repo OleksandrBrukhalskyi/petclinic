@@ -30,7 +30,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     public Specialty update(Specialty specialty, Long id) {
         Specialty sp = specialtyRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
-        sp.setSpecialty(specialty.getSpecialty());
+        sp.setName(specialty.getName());
         return specialtyRepository.save(sp);
     }
 
