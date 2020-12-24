@@ -14,11 +14,18 @@
             <column name="owner_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_owner"
-                             references="owners(id)"/>
+                             references="owners(id)"
+                             deleteCascade="true"
+                />
             </column>
         </createTable>
         <rollback>
             <dropTable tableName="pets"/>
         </rollback>
     </changeSet>
+<!--    <changeSet id="5" author="Oleksandr Brukhalskyi">-->
+<!--        <addForeignKeyConstraint baseTableName="pets" baseColumnNames="owner_id" constraintName="cascade_fk_delete" referencedTableName="owners"-->
+<!--                                 referencedColumnNames="id"-->
+<!--                                 onDelete="CASCADE"/>-->
+<!--    </changeSet>-->
 </databaseChangeLog>
