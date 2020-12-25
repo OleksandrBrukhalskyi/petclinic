@@ -9,9 +9,9 @@ import java.util.List;
 @Service
 public interface OwnerService {
     OwnerDto create(OwnerDto ownerDto);
-    OwnerDto update(OwnerDto ownerDto, Long id);
-    Owner getById(Long id);
-    void delete(Long id);
+    OwnerDto update(OwnerDto ownerDto, long id);
+    Owner getById(long id);
+    void delete(long id);
     List<Owner> getAll();
     List<OwnerDto> getAllDto();
 }

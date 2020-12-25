@@ -21,7 +21,7 @@ import java.util.List;
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(name = "surname")
     private String surname;
     @Column(name = "firstname")

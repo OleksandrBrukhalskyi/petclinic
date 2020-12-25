@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name = "date_of_birth")

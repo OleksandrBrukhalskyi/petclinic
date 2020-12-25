@@ -20,28 +20,26 @@ public class SpecialtyServiceImpl implements SpecialtyService {
         this.specialtyRepository = specialtyRepository;
 
     }
-
     @Override
     public Specialty create(Specialty specialty) {
         return specialtyRepository.save(specialty);
     }
 
     @Override
-    public Specialty update(Specialty specialty, Long id) {
+    public Specialty update(Specialty specialty, long id) {
         Specialty sp = specialtyRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
         sp.setName(specialty.getName());
         return specialtyRepository.save(sp);
     }
-
     @Override
-    public Specialty getById(Long id) {
+    public Specialty getById(long id) {
         return specialtyRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         specialtyRepository.deleteById(id);
     }
 

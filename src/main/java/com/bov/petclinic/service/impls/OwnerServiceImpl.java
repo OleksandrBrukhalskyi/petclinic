@@ -37,7 +37,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto update(OwnerDto ownerDto, Long id) {
+    public OwnerDto update(OwnerDto ownerDto, long id) {
         log.info("Owner updated");
         Owner owner = ownerRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
@@ -51,13 +51,13 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner getById(Long id) {
+    public Owner getById(long id) {
         log.info("Owner found");
         return ownerRepository.findById(id).orElseThrow(() -> new RuntimeException("Owner did not found"));
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         log.info("Onwer deleted");
         this.ownerRepository.deleteById(id);
     }

@@ -47,7 +47,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public PetDtoResponse update(PetDtoRequest petDtoRequest, Long id) {
+    public PetDtoResponse update(PetDtoRequest petDtoRequest, long id) {
         log.info("Pet updated!");
         Pet toUpdate = modelMapper.map(petDtoRequest,Pet.class);
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
@@ -66,13 +66,13 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet getById(Long id) {
+    public Pet getById(long id) {
         log.info("Pet found by this id:" + id);
         return petRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         log.info("Pet deleted");
         this.petRepository.deleteById(id);
     }
