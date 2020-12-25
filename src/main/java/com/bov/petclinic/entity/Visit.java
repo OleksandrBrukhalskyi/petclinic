@@ -19,7 +19,7 @@ import java.util.Date;
 public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(name = "visit_date")
     private Date visitDate;
     @Column(name = "goal_of_visit")
