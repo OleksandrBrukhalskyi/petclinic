@@ -9,7 +9,7 @@ import java.util.List;
 public interface VisitService {
     Visit create(Visit visit);
     Visit update(Visit visit);
-    Visit getById(Long id);
-    void delete(Long id);
+    Visit getById(long id);
+    void delete(long id);
     List<Visit> getAll();
 }

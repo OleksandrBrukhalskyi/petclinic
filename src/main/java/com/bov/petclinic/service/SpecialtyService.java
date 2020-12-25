@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public interface SpecialtyService {
     Specialty create(Specialty specialty);
-    Specialty update(Specialty specialty, Long id);
-    Specialty getById(Long id);
-    void delete(Long id);
+    Specialty update(Specialty specialty, long id);
+    Specialty getById(long id);
+    void delete(long id);
     List<Specialty> getAll();
 }

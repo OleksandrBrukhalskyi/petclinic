@@ -9,7 +9,7 @@ import java.util.List;
 public interface VeterinarianService {
     Veterinarian create(Veterinarian veterinarian);
     Veterinarian update(Veterinarian veterinarian);
-    Veterinarian getById(Long id);
-    void delete(Long id);
+    Veterinarian getById(long id);
+    void delete(long id);
     List<Veterinarian> getAll();
 }
