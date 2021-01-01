@@ -37,7 +37,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto update(OwnerDto ownerDto, long id) {
+    public OwnerDto update(OwnerDto ownerDto,long id) {
         log.info("Owner updated");
         Owner owner = ownerRepository.findById(id)
                 .orElseThrow(RuntimeException::new);

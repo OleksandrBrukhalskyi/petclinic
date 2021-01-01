@@ -1,4 +1,4 @@
-package com.bov.petclinic;
+package com.bov.petclinic.controller;
 import com.bov.petclinic.entity.Specialty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
