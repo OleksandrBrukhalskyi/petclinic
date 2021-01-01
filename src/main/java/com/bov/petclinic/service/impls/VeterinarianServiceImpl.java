@@ -28,6 +28,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
 
     @Override
     public Veterinarian create(Veterinarian veterinarian) {
+        log.info("Using 'create' method for saving record into DB " + veterinarian);
         Specialty specialty = specialtyService.getById(veterinarian.getSpecialty().getId());
         Veterinarian toSave = new Veterinarian();
         toSave.setSurname(veterinarian.getSurname());
@@ -39,6 +40,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
 
     @Override
     public Veterinarian update(Veterinarian veterinarian) {
+        log.info("Using 'update' method for updating record " + veterinarian);
         if(veterinarian != null){
             Veterinarian oldVet = getById(veterinarian.getId());
             if(oldVet != null){
@@ -50,6 +52,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
 
     @Override
     public Veterinarian getById(long id) {
+        log.info("Using 'getById' method for retrieving record by id: " + id);
         Optional<Veterinarian> optional = veterinarianRepository.findById(id);
         if (optional.isPresent()) {
             return optional.get();
@@ -58,6 +61,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
     }
     @Override
     public void delete(long id) {
+        log.info("Using 'delete' method for deleting record from DB by id: " + id);
         Veterinarian veterinarian = getById(id);
         if(veterinarian != null){
             veterinarianRepository.delete(veterinarian);
@@ -68,6 +72,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
 
     @Override
     public List<Veterinarian> getAll() {
+        log.info("Using 'getAll' method for retrieving all records from DB");
         List<Veterinarian> veterinarians = veterinarianRepository.findAll();
         return veterinarians.isEmpty() ? new ArrayList<>() : veterinarians;
     }
