@@ -1,7 +1,6 @@
 package com.bov.petclinic.entity;
 
-import com.bov.petclinic.entity.Owner;
-import com.bov.petclinic.entity.Pet;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
