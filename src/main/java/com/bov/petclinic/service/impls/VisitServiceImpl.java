@@ -24,11 +24,13 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Visit create(Visit visit) {
+        log.info("Using 'create' method for saving visit record into DB " + visit);
         return visitRepository.save(visit);
     }
 
     @Override
     public Visit update(Visit visit) {
+        log.info("Using 'update' method for updating visit record" + visit);
         if(visit != null){
             Visit oldVisit = getById(visit.getId());
             if(oldVisit != null){
@@ -41,6 +43,7 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Visit getById(long id) {
+        log.info("Using 'getById' method for retrieving record from DB");
         Optional<Visit> visit = visitRepository.findById(id);
         if(visit.isPresent()){
             return visit.get();
@@ -51,6 +54,7 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public void delete(long id) {
+        log.info("Using 'delete' method for deleting record from DB");
         Visit visit = getById(id);
         if(visit != null){
             visitRepository.delete(visit);
@@ -61,6 +65,7 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<Visit> getAll() {
+        log.info("Using 'getAll' method for retrieving all visit records from DB");
         List<Visit> visits = visitRepository.findAll();
         return visits.isEmpty() ? new ArrayList<>() : visits;
     }
