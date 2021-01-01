@@ -26,4 +26,5 @@ public class Visit {
     private String goalOfVisit;
     @ManyToOne(fetch = FetchType.LAZY)
     private Pet pet;
+
 }
