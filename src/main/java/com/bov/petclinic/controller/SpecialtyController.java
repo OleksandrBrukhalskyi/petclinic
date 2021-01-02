@@ -46,7 +46,7 @@ public class SpecialtyController {
         Specialty returnedSpecialtyById = specialtyService.getById(id);
         returnedSpecialtyById.setName(specialty.getName());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(specialtyService.update(specialty,id));
+                .body(specialtyService.update(returnedSpecialtyById));
     }
     @ApiOperation(value = "Return specialty by id")
     @ApiResponses(value = {
