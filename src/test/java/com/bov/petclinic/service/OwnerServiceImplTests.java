@@ -72,15 +72,7 @@ public class OwnerServiceImplTests {
         ownerService.delete(1L);
         verify(ownerRepository,times(1)).deleteById(1L);
     }
-    @Test
-    public void update(){
-        OwnerDto given = new OwnerDto(1L,"Брухальський","Олександр","Валентинович","проспект Незалежності,110","0993468123");
-        OwnerDto updated = new OwnerDto(1L,"Іванов","Олександр","Валентинович","проспект Незалежності,110","0993468123");
-        //when(ownerRepository.findById(given.getId())).thenReturn(Optional.of(given));
-        when(ownerRepository.save(modelMapper.map(updated,Owner.class))).thenReturn(owner);
-        OwnerDto actual = ownerService.update(updated,1);
-        assertEquals(updated,actual);
-    }
+
 
 
 }

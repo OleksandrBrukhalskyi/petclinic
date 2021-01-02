@@ -37,15 +37,15 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto update(OwnerDto ownerDto,long id) {
+    public OwnerDto update(Owner owner) {
         log.info("Owner updated");
-        Owner owner = ownerRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
-        owner.setSurname(ownerDto.getSurname());
-        owner.setFirstname(ownerDto.getFirstname());
-        owner.setPatronymic(ownerDto.getPatronymic());
-        owner.setHomeAddress(ownerDto.getHomeAddress());
-        owner.setPhoneNumber(ownerDto.getPhoneNumber());
+//        Owner owner = ownerRepository.findB
+//                .orElseThrow(RuntimeException::new);
+//        owner.setSurname(ownerDto.getSurname());
+//        owner.setFirstname(ownerDto.getFirstname());
+//        owner.setPatronymic(ownerDto.getPatronymic());
+//        owner.setHomeAddress(ownerDto.getHomeAddress());
+//        owner.setPhoneNumber(ownerDto.getPhoneNumber());
 
         return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
