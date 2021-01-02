@@ -25,14 +25,8 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto create(OwnerDto ownerDto) {
+    public OwnerDto create(Owner owner) {
         log.info("Owner created");
-        Owner owner = modelMapper.map(ownerDto, Owner.class);
-        owner.setSurname(ownerDto.getSurname());
-        owner.setFirstname(ownerDto.getFirstname());
-        owner.setPatronymic(ownerDto.getPatronymic());
-        owner.setHomeAddress(ownerDto.getHomeAddress());
-        owner.setPhoneNumber(ownerDto.getPhoneNumber());
         return modelMapper.map(ownerRepository.save(owner), OwnerDto.class);
     }
 

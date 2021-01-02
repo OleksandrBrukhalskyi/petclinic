@@ -58,13 +58,6 @@ public class OwnerServiceImplTests {
         assertEquals(owner,ownerService.getById(1L));
     }
     @Test
-    public void save(){
-        when(modelMapper.map(ownerDto, Owner.class)).thenReturn(owner);
-        when(modelMapper.map(owner, OwnerDto.class)).thenReturn(ownerDto);
-        when(ownerRepository.save(owner)).thenReturn(owner);
-        assertEquals(ownerDto,ownerService.create(ownerDto));
-    }
-    @Test
     public void delete(){
         doNothing().when(ownerRepository).deleteById(1L);
         when(ownerRepository.findById(anyLong()))

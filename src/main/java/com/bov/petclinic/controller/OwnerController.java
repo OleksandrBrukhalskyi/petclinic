@@ -36,9 +36,9 @@ public class OwnerController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PostMapping("/add")
-    public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto) {
+    public ResponseEntity<OwnerDto> create(@Valid @RequestBody Owner owner) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ownerService.create(ownerDto));
+                .body(ownerService.create(owner));
     }
     @ApiOperation(value = "Update owner")
     @ApiResponses(value = {
