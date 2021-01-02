@@ -26,11 +26,12 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public Specialty update(Specialty specialty, long id) {
-        Specialty sp = specialtyRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
-        sp.setName(specialty.getName());
-        return specialtyRepository.save(sp);
+    public Specialty update(Specialty specialty) {
+        Specialty oldSpecialty = getById(specialty.getId());
+        if(oldSpecialty != null){
+            return specialtyRepository.save(specialty);
+        }
+        throw new NullPointerException("Specialty can't be 'null'");
     }
     @Override
     public Specialty getById(long id) {

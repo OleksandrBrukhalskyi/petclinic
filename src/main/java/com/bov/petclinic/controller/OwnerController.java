@@ -36,9 +36,9 @@ public class OwnerController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PostMapping("/add")
-    public ResponseEntity<OwnerDto> create(@Valid @RequestBody OwnerDto ownerDto) {
+    public ResponseEntity<OwnerDto> create(@Valid @RequestBody Owner owner) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ownerService.create(ownerDto));
+                .body(ownerService.create(owner));
     }
     @ApiOperation(value = "Update owner")
     @ApiResponses(value = {
@@ -49,14 +49,13 @@ public class OwnerController {
     @PutMapping("/{id}")
     public ResponseEntity<OwnerDto> update(@Valid @RequestBody OwnerDto ownerDto, @PathVariable("id") Long id){
         Owner owner = ownerService.getById(id);
-        owner.setId(ownerDto.getId());
         owner.setSurname(ownerDto.getSurname());
         owner.setFirstname(ownerDto.getFirstname());
         owner.setPatronymic(ownerDto.getPatronymic());
         owner.setHomeAddress(ownerDto.getHomeAddress());
         owner.setPhoneNumber(ownerDto.getPhoneNumber());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ownerService.update(ownerDto,id));
+                .body(ownerService.update(owner));
     }
     @ApiOperation("Get owner by id")
     @ApiResponses(value = {
