@@ -1,15 +1,12 @@
 package com.bov.petclinic.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class PetDtoResponse {
-    private Long id;
+    private long id;
     private String name;
     private LocalDate dateOfBirth;
     private String breed;
