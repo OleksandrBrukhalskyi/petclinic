@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface PetService {
     PetDtoResponse create(PetDtoRequest petDtoRequest);
-    PetDtoResponse update(PetDtoRequest petDtoRequest, long id);
+    PetDtoResponse update(PetDtoRequest petDtoRequest);
     Pet getById(long id);
     void delete(long id);
     List<Pet> getAll();
