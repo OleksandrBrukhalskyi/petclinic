@@ -38,29 +38,21 @@ public class PetServiceImpl implements PetService {
         toSave.setBreed(petDtoRequest.getBreed());
         toSave.setDateOfBirth(petDtoRequest.getDateOfBirth());
         toSave.setOwner(owner);
-        try{
-            petRepository.save(toSave);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-        return modelMapper.map(toSave,PetDtoResponse.class);
+        return modelMapper.map(petRepository.save(toSave),PetDtoResponse.class);
     }
 
     @Override
-    public PetDtoResponse update(PetDtoRequest petDtoRequest, long id) {
-        log.info("Pet updated!");
+    public PetDtoResponse update(PetDtoRequest petDtoRequest) {
         Pet toUpdate = modelMapper.map(petDtoRequest,Pet.class);
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
         toUpdate.setName(petDtoRequest.getName());
         toUpdate.setBreed(petDtoRequest.getBreed());
         toUpdate.setDateOfBirth(petDtoRequest.getDateOfBirth());
         toUpdate.setOwner(owner);
-        try{
-            petRepository.save(toUpdate);
-        }catch (Exception e){
-            log.info(e.getMessage());
-        }
-        return modelMapper.map(toUpdate,PetDtoResponse.class);
+        log.info("Pet updated!");
+        return modelMapper.map(petRepository.save(toUpdate),PetDtoResponse.class);
+
+
 
 
     }
