@@ -50,7 +50,7 @@ public class PetController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable("id") Long id){
+    public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable Long id){
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
         Pet pet = petService.getById(id);
         pet.setName(petDtoRequest.getName());
@@ -59,7 +59,7 @@ public class PetController {
         pet.setOwner(owner);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(petService.update(petDtoRequest,id));
+                .body(petService.update(petDtoRequest));
     }
     @ApiOperation(value = "Return pet by id")
     @ApiResponses(value = {
