@@ -52,11 +52,12 @@ public class PetController {
     @PutMapping("/{id}")
     public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable Long id){
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
-        Pet pet = petService.getById(id);
-        pet.setName(petDtoRequest.getName());
-        pet.setBreed(petDtoRequest.getBreed());
-        pet.setDateOfBirth(petDtoRequest.getDateOfBirth());
-        pet.setOwner(owner);
+        //Pet pet = petService.getById(id);
+        petDtoRequest.setId(id);
+//        pet.setName(petDtoRequest.getName());
+//        pet.setBreed(petDtoRequest.getBreed());
+//        pet.setDateOfBirth(petDtoRequest.getDateOfBirth());
+//        pet.setOwner(owner);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(petService.update(petDtoRequest));
