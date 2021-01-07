@@ -78,6 +78,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         }
         throw new BadIdException("Veterinarian with id " + id + " not found");
     }
+
     @Override
     public void delete(long id) {
         Veterinarian veterinarian = getById(id);
