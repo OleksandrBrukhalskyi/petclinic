@@ -51,7 +51,6 @@ public class PetController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable Long id){
-        Owner owner = ownerService.getById(petDtoRequest.getOwner());
         petDtoRequest.setId(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(petService.update(petDtoRequest));
