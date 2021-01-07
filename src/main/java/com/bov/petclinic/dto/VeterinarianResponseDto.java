@@ -12,5 +12,5 @@ public class VeterinarianResponseDto {
     private String surname;
     private String firstname;
     private String patronymic;
-    private long specialty;
+    private SpecialtyDto specialty;
 }
