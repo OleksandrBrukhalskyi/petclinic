@@ -31,7 +31,25 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         this.specialtyService = specialtyService;
         this.modelMapper = modelMapper;
     }
-    
+
+    @Override
+    public VeterinarianResponseDto update(VeterinarianRequestDto veterinarian) {
+        if(veterinarian == null){
+            throw new NullPointerException("Veterinarian is null");
+        }
+        Veterinarian toUpdate = modelMapper.map(veterinarian,Veterinarian.class);
+        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
+        toUpdate.setSurname(veterinarian.getSurname());
+        toUpdate.setFirstname(veterinarian.getFirstname());
+        toUpdate.setPatronymic(veterinarian.getPatronymic());
+        toUpdate.setSpecialty(specialty);
+        try{
+            veterinarianRepository.save(toUpdate);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return modelMapper.map(toUpdate,VeterinarianResponseDto.class);
+    }
     @Override
     public Veterinarian getById(long id) {
         log.info("Using 'getById' method for retrieving record by id: " + id);
@@ -41,6 +59,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         }
         throw new BadIdException("Veterinarian with id " + id + " not found");
     }
+
     @Override
     public void delete(long id) {
         log.info("Using 'delete' method for deleting record from DB by id: " + id);
