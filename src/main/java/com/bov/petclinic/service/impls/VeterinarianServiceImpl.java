@@ -26,29 +26,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         this.specialtyService = specialtyService;
     }
 
-    @Override
-    public Veterinarian create(Veterinarian veterinarian) {
-        log.info("Using 'create' method for saving record into DB " + veterinarian);
-        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty().getId());
-        Veterinarian toSave = new Veterinarian();
-        toSave.setSurname(veterinarian.getSurname());
-        toSave.setFirstname(veterinarian.getFirstname());
-        toSave.setPatronymic(veterinarian.getPatronymic());
-        toSave.setSpecialty(specialty);
-        return veterinarianRepository.save(toSave);
-    }
-
-    @Override
-    public Veterinarian update(Veterinarian veterinarian) {
-        log.info("Using 'update' method for updating record " + veterinarian);
-        if(veterinarian != null){
-            Veterinarian oldVet = getById(veterinarian.getId());
-            if(oldVet != null){
-                return veterinarianRepository.save(veterinarian);
-            }
-        }
-        throw  new NullPointerException("Veterinarian can't be `null`");
-    }
+  
 
     @Override
     public Veterinarian getById(long id) {
