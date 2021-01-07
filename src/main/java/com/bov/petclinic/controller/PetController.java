@@ -3,7 +3,6 @@ package com.bov.petclinic.controller;
 import com.bov.petclinic.constant.HttpStatuses;
 import com.bov.petclinic.dto.PetDtoRequest;
 import com.bov.petclinic.dto.PetDtoResponse;
-import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.service.OwnerService;
 import com.bov.petclinic.service.PetService;
@@ -24,12 +23,12 @@ import java.util.List;
 public class PetController {
 
     private final PetService petService;
-    private final OwnerService ownerService;
+
 
     @Autowired
-    public PetController(PetService petService, OwnerService ownerService) {
+    public PetController(PetService petService) {
         this.petService = petService;
-        this.ownerService = ownerService;
+
     }
     @ApiOperation(value = "Save pet")
     @ApiResponses(value = {
