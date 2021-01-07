@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -73,25 +74,29 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet getById(long id) {
-        if(id <= 0){
-            throw new BadIdException("Incorrect id: " + id);
+        Optional<Pet> optionalPet = petRepository.findById(id);
+        if(optionalPet.isPresent()){
+            return optionalPet.get();
         }
         log.info("Pet found by this id:" + id);
-        return petRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
+        throw new BadIdException("Pet not found by this id: " + id);
     }
 
     @Override
     public void delete(long id) {
-        if(id <= 0){
-            throw new BadIdException("Incorrect id: " + id);
+        Pet pet = getById(id);
+        if(pet != null){
+            petRepository.delete(pet);
+            log.info("Pet deleted");
+        } else {
+            throw new BadIdException("Pet not found by this id: " + id);
         }
-        this.petRepository.deleteById(id);
-        log.info("Pet deleted");
+
     }
 
     @Override
     public List<Pet> getAll() {
-        log.info("List of pets",petRepository.findAll());
+        log.info("List of pets: " + petRepository.findAll());
         return petRepository.findAll();
     }
 }
