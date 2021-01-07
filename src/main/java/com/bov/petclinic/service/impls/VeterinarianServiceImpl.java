@@ -31,6 +31,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         this.specialtyService = specialtyService;
         this.modelMapper = modelMapper;
     }
+
     @Override
     public VeterinarianResponseDto create(VeterinarianRequestDto veterinarian) {
         if(veterinarian == null){
