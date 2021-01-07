@@ -1,5 +1,7 @@
 package com.bov.petclinic.service.impls;
 
+import com.bov.petclinic.dto.VeterinarianRequestDto;
+import com.bov.petclinic.dto.VeterinarianResponseDto;
 import com.bov.petclinic.entity.Specialty;
 import com.bov.petclinic.entity.Veterinarian;
 import com.bov.petclinic.exceptions.BadIdException;
@@ -7,8 +9,10 @@ import com.bov.petclinic.repository.VeterinarianRepository;
 import com.bov.petclinic.service.SpecialtyService;
 import com.bov.petclinic.service.VeterinarianService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +23,14 @@ import java.util.Optional;
 public class VeterinarianServiceImpl implements VeterinarianService {
     private final VeterinarianRepository veterinarianRepository;
     private final SpecialtyService specialtyService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public VeterinarianServiceImpl(VeterinarianRepository veterinarianRepository, SpecialtyService specialtyService) {
+    public VeterinarianServiceImpl(VeterinarianRepository veterinarianRepository, SpecialtyService specialtyService, ModelMapper modelMapper) {
         this.veterinarianRepository = veterinarianRepository;
         this.specialtyService = specialtyService;
+        this.modelMapper = modelMapper;
     }
-
-  
 
     @Override
     public Veterinarian getById(long id) {
