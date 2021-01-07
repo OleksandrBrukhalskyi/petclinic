@@ -31,24 +31,6 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         this.specialtyService = specialtyService;
         this.modelMapper = modelMapper;
     }
-    @Override
-    public VeterinarianResponseDto create(VeterinarianRequestDto veterinarian) {
-        if(veterinarian == null){
-            throw new NullPointerException("Veterinarian is null");
-        }
-        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
-        Veterinarian toSave = modelMapper.map(veterinarian,Veterinarian.class);
-        toSave.setSurname(veterinarian.getSurname());
-        toSave.setFirstname(veterinarian.getFirstname());
-        toSave.setPatronymic(veterinarian.getPatronymic());
-        toSave.setSpecialty(specialty);
-        try{
-            veterinarianRepository.save(toSave);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-        return modelMapper.map(toSave, VeterinarianResponseDto.class);
-    }
 
     @Override
     public VeterinarianResponseDto update(VeterinarianRequestDto veterinarian) {
