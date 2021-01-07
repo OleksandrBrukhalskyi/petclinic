@@ -31,42 +31,7 @@ public class VeterinarianServiceImpl implements VeterinarianService {
         this.specialtyService = specialtyService;
         this.modelMapper = modelMapper;
     }
-    @Override
-    public VeterinarianResponseDto create(VeterinarianRequestDto veterinarian) {
-        if(veterinarian == null){
-            throw new NullPointerException("Veterinarian is null");
-        }
-        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
-        Veterinarian toSave = modelMapper.map(veterinarian,Veterinarian.class);
-        toSave.setSurname(veterinarian.getSurname());
-        toSave.setFirstname(veterinarian.getFirstname());
-        toSave.setPatronymic(veterinarian.getPatronymic());
-        toSave.setSpecialty(specialty);
-        try{
-            veterinarianRepository.save(toSave);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-        return modelMapper.map(toSave, VeterinarianResponseDto.class);
-    }
-    @Override
-    public VeterinarianResponseDto update(VeterinarianRequestDto veterinarian) {
-        if(veterinarian == null){
-            throw new NullPointerException("Veterinarian is null");
-        }
-        Veterinarian toUpdate = modelMapper.map(veterinarian,Veterinarian.class);
-        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
-        toUpdate.setSurname(veterinarian.getSurname());
-        toUpdate.setFirstname(veterinarian.getFirstname());
-        toUpdate.setPatronymic(veterinarian.getPatronymic());
-        toUpdate.setSpecialty(specialty);
-        try{
-            veterinarianRepository.save(toUpdate);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-        return modelMapper.map(toUpdate,VeterinarianResponseDto.class);
-    }
+
     @Override
     public Veterinarian getById(long id) {
         log.info("Using 'getById' method for retrieving record by id: " + id);
