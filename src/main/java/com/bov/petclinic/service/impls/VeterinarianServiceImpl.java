@@ -1,5 +1,7 @@
 package com.bov.petclinic.service.impls;
 
+import com.bov.petclinic.dto.VeterinarianRequestDto;
+import com.bov.petclinic.dto.VeterinarianResponseDto;
 import com.bov.petclinic.entity.Specialty;
 import com.bov.petclinic.entity.Veterinarian;
 import com.bov.petclinic.exceptions.BadIdException;
@@ -7,6 +9,7 @@ import com.bov.petclinic.repository.VeterinarianRepository;
 import com.bov.petclinic.service.SpecialtyService;
 import com.bov.petclinic.service.VeterinarianService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +22,52 @@ import java.util.Optional;
 public class VeterinarianServiceImpl implements VeterinarianService {
     private final VeterinarianRepository veterinarianRepository;
     private final SpecialtyService specialtyService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public VeterinarianServiceImpl(VeterinarianRepository veterinarianRepository, SpecialtyService specialtyService) {
+    public VeterinarianServiceImpl(VeterinarianRepository veterinarianRepository, SpecialtyService specialtyService, ModelMapper modelMapper) {
         this.veterinarianRepository = veterinarianRepository;
         this.specialtyService = specialtyService;
+        this.modelMapper = modelMapper;
     }
 
-  
+    @Override
+    public VeterinarianResponseDto create(VeterinarianRequestDto veterinarian) {
+        if(veterinarian == null){
+            throw new NullPointerException("Veterinarian is null");
+        }
+        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
+        Veterinarian toSave = modelMapper.map(veterinarian,Veterinarian.class);
+        toSave.setSurname(veterinarian.getSurname());
+        toSave.setFirstname(veterinarian.getFirstname());
+        toSave.setPatronymic(veterinarian.getPatronymic());
+        toSave.setSpecialty(specialty);
+        try{
+            veterinarianRepository.save(toSave);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return modelMapper.map(toSave, VeterinarianResponseDto.class);
+    }
+    @Override
+    public VeterinarianResponseDto update(VeterinarianRequestDto veterinarian) {
+        if(veterinarian == null){
+            throw new NullPointerException("Veterinarian is null");
+        }
+        Veterinarian toUpdate = modelMapper.map(veterinarian,Veterinarian.class);
+        Specialty specialty = specialtyService.getById(veterinarian.getSpecialty());
+        toUpdate.setSurname(veterinarian.getSurname());
+        toUpdate.setFirstname(veterinarian.getFirstname());
+        toUpdate.setPatronymic(veterinarian.getPatronymic());
+        toUpdate.setSpecialty(specialty);
+        try{
+            veterinarianRepository.save(toUpdate);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return modelMapper.map(toUpdate,VeterinarianResponseDto.class);
+    }
+
 
     @Override
     public Veterinarian getById(long id) {
