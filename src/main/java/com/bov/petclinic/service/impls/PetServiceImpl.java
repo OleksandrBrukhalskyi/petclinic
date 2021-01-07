@@ -35,14 +35,19 @@ public class PetServiceImpl implements PetService {
         if(petDtoRequest == null){
             throw new NullPointerException("Pet is null");
         }
-        log.info("Pet added");
         Pet toSave = modelMapper.map(petDtoRequest,Pet.class);
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
         toSave.setName(petDtoRequest.getName());
         toSave.setBreed(petDtoRequest.getBreed());
         toSave.setDateOfBirth(petDtoRequest.getDateOfBirth());
         toSave.setOwner(owner);
-        return modelMapper.map(petRepository.save(toSave),PetDtoResponse.class);
+        try{
+            petRepository.save(toSave);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        log.info("Pet added");
+        return modelMapper.map(toSave,PetDtoResponse.class);
     }
 
     @Override
@@ -56,8 +61,13 @@ public class PetServiceImpl implements PetService {
         toUpdate.setBreed(petDtoRequest.getBreed());
         toUpdate.setDateOfBirth(petDtoRequest.getDateOfBirth());
         toUpdate.setOwner(owner);
+        try{
+            petRepository.save(toUpdate);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
         log.info("Pet updated!");
-        return modelMapper.map(petRepository.save(toUpdate),PetDtoResponse.class);
+        return modelMapper.map(toUpdate,PetDtoResponse.class);
 
     }
 
