@@ -4,6 +4,7 @@ import com.bov.petclinic.dto.PetDtoRequest;
 import com.bov.petclinic.dto.PetDtoResponse;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.entity.Pet;
+import com.bov.petclinic.exceptions.BadIdException;
 import com.bov.petclinic.repository.PetRepository;
 import com.bov.petclinic.service.OwnerService;
 import com.bov.petclinic.service.PetService;
@@ -31,6 +32,9 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public PetDtoResponse create(PetDtoRequest petDtoRequest) {
+        if(petDtoRequest == null){
+            throw new NullPointerException("Pet is null");
+        }
         log.info("Pet added");
         Pet toSave = modelMapper.map(petDtoRequest,Pet.class);
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
@@ -43,6 +47,9 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public PetDtoResponse update(PetDtoRequest petDtoRequest) {
+        if(petDtoRequest == null){
+            throw new NullPointerException("Pet is null");
+        }
         Pet toUpdate = modelMapper.map(petDtoRequest,Pet.class);
         Owner owner = ownerService.getById(petDtoRequest.getOwner());
         toUpdate.setName(petDtoRequest.getName());
@@ -52,21 +59,24 @@ public class PetServiceImpl implements PetService {
         log.info("Pet updated!");
         return modelMapper.map(petRepository.save(toUpdate),PetDtoResponse.class);
 
-
-
-
     }
 
     @Override
     public Pet getById(long id) {
+        if(id <= 0){
+            throw new BadIdException("Incorrect id: " + id);
+        }
         log.info("Pet found by this id:" + id);
         return petRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 
     @Override
     public void delete(long id) {
-        log.info("Pet deleted");
+        if(id <= 0){
+            throw new BadIdException("Incorrect id: " + id);
+        }
         this.petRepository.deleteById(id);
+        log.info("Pet deleted");
     }
 
     @Override
