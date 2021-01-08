@@ -11,6 +11,6 @@ import java.util.Date;
 public class VisitRequestDto {
     private long id;
     private Date visitDate;
-    private String reasonOfVisit;
+    private String goalOfVisit;
     private long pet;
 }
