@@ -38,8 +38,8 @@ public class VisitServiceImpl implements VisitService {
         }
         Pet pet = petService.getById(visitRequestDto.getPet());
         Visit toSave = modelMapper.map(visitRequestDto,Visit.class);
-        toSave.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
         toSave.setVisitDate(visitRequestDto.getVisitDate());
+        toSave.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
         toSave.setPet(pet);
         try{
             visitRepository.save(toSave);
