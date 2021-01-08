@@ -10,6 +10,6 @@ import java.util.Date;
 public class VisitResponseDto {
     private long id;
     private Date visitDate;
-    private String reasonOfVisit;
+    private String goalOfVisit;
     private PetDtoResponse pet;
 }
