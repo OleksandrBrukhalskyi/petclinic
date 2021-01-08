@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -95,8 +96,10 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<Pet> getAll() {
-        log.info("List of pets: " + petRepository.findAll());
-        return petRepository.findAll();
+    public List<PetDtoResponse> getAll() {
+      return petRepository.findAll()
+              .stream()
+              .map(pet -> modelMapper.map(pet,PetDtoResponse.class))
+              .collect(Collectors.toList());
     }
 }
