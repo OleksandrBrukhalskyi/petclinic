@@ -1,10 +1,15 @@
 package com.bov.petclinic.service.impls;
 
+import com.bov.petclinic.dto.VisitRequestDto;
+import com.bov.petclinic.dto.VisitResponseDto;
+import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.entity.Visit;
 import com.bov.petclinic.exceptions.BadIdException;
 import com.bov.petclinic.repository.VisitRepository;
+import com.bov.petclinic.service.PetService;
 import com.bov.petclinic.service.VisitService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +21,53 @@ import java.util.Optional;
 @Service
 public class VisitServiceImpl implements VisitService {
     private final VisitRepository visitRepository;
+    private final ModelMapper modelMapper;
+    private final PetService petService;
 
     @Autowired
-    public VisitServiceImpl(VisitRepository visitRepository) {
+    public VisitServiceImpl(VisitRepository visitRepository, ModelMapper modelMapper, PetService petService) {
         this.visitRepository = visitRepository;
+        this.modelMapper = modelMapper;
+        this.petService = petService;
     }
 
     @Override
-    public Visit create(Visit visit) {
-        log.info("Using 'create' method for saving visit record into DB " + visit);
-        return visitRepository.save(visit);
-    }
-
-    @Override
-    public Visit update(Visit visit) {
-        log.info("Using 'update' method for updating visit record" + visit);
-        if(visit != null){
-            Visit oldVisit = getById(visit.getId());
-            if(oldVisit != null){
-                return visitRepository.save(visit);
-            }
+    public VisitResponseDto create(VisitRequestDto visitRequestDto) {
+        if(visitRequestDto == null){
+            throw new NullPointerException("Visit is null");
         }
-        throw new NullPointerException("Visit can't be 'null'");
+        Pet pet = petService.getById(visitRequestDto.getPet());
+        Visit toSave = modelMapper.map(visitRequestDto,Visit.class);
+        toSave.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
+        toSave.setVisitDate(visitRequestDto.getVisitDate());
+        toSave.setPet(pet);
+        try{
+            visitRepository.save(toSave);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        log.info("Using 'create' method for saving visit record into DB: " + toSave);
+        return modelMapper.map(toSave,VisitResponseDto.class);
+
+    }
+
+    @Override
+    public VisitResponseDto update(VisitRequestDto visitRequestDto) {
+        if(visitRequestDto == null){
+            throw new NullPointerException("Visit is null");
+        }
+        Pet pet = petService.getById(visitRequestDto.getPet());
+        Visit toUpdate = modelMapper.map(visitRequestDto,Visit.class);
+        toUpdate.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
+        toUpdate.setVisitDate(visitRequestDto.getVisitDate());
+        toUpdate.setPet(pet);
+        try{
+            visitRepository.save(toUpdate);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        log.info("Using 'update' method for updating visit record" + toUpdate);
+        return modelMapper.map(toUpdate,VisitResponseDto.class);
 
     }
 
