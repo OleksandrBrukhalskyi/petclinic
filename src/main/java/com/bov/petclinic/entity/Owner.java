@@ -2,10 +2,7 @@ package com.bov.petclinic.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,10 +11,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "owners")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
