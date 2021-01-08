@@ -13,5 +13,5 @@ public interface PetService {
     PetDtoResponse update(PetDtoRequest petDtoRequest);
     Pet getById(long id);
     void delete(long id);
-    List<Pet> getAll();
+    List<PetDtoResponse> getAll();
 }
