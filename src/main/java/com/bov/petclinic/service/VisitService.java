@@ -13,5 +13,5 @@ public interface VisitService {
     VisitResponseDto update(VisitRequestDto visit);
     Visit getById(long id);
     void delete(long id);
-    List<Visit> getAll();
+    List<VisitResponseDto> getAll();
 }

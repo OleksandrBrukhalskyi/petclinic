@@ -13,9 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,7 +39,7 @@ public class VisitServiceImpl implements VisitService {
         Pet pet = petService.getById(visitRequestDto.getPet());
         Visit toSave = modelMapper.map(visitRequestDto,Visit.class);
         toSave.setVisitDate(visitRequestDto.getVisitDate());
-        toSave.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
+        toSave.setGoalOfVisit(visitRequestDto.getGoalOfVisit());
         toSave.setPet(pet);
         try{
             visitRepository.save(toSave);
@@ -58,7 +58,7 @@ public class VisitServiceImpl implements VisitService {
         }
         Pet pet = petService.getById(visitRequestDto.getPet());
         Visit toUpdate = modelMapper.map(visitRequestDto,Visit.class);
-        toUpdate.setGoalOfVisit(visitRequestDto.getReasonOfVisit());
+        toUpdate.setGoalOfVisit(visitRequestDto.getGoalOfVisit());
         toUpdate.setVisitDate(visitRequestDto.getVisitDate());
         toUpdate.setPet(pet);
         try{
@@ -94,9 +94,11 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public List<Visit> getAll() {
+    public List<VisitResponseDto> getAll() {
         log.info("Using 'getAll' method for retrieving all visit records from DB");
-        List<Visit> visits = visitRepository.findAll();
-        return visits.isEmpty() ? new ArrayList<>() : visits;
+        return visitRepository.findAll()
+                .stream()
+                .map(visit -> modelMapper.map(visit,VisitResponseDto.class))
+                .collect(Collectors.toList());
     }
 }
