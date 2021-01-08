@@ -65,7 +65,7 @@ public class VisitController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping
-    public List<Visit> getAll(){
+    public List<VisitResponseDto> getAll(){
         return visitService.getAll();
     }
     @ApiOperation(value = "Delete visit by id")
