@@ -71,7 +71,7 @@ public class PetController {
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping
-    public List<Pet> getAll(){
+    public List<PetDtoResponse> getAll(){
         return petService.getAll();
     }
     @ApiOperation(value = "Delete pet")
