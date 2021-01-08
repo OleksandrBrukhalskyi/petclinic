@@ -25,7 +25,6 @@ public class Pet {
     private LocalDate dateOfBirth;
     @Column(name ="breed")
     private String breed;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     @JsonBackReference
