@@ -1,10 +1,10 @@
 package com.bov.petclinic.controller;
 
 import com.bov.petclinic.constant.HttpStatuses;
-import com.bov.petclinic.dto.PetDtoRequest;
-import com.bov.petclinic.dto.PetDtoResponse;
-import com.bov.petclinic.entity.Pet;
-import com.bov.petclinic.service.PetService;
+import com.bov.petclinic.dto.VisitRequestDto;
+import com.bov.petclinic.dto.VisitResponseDto;
+import com.bov.petclinic.entity.Visit;
+import com.bov.petclinic.service.VisitService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,71 +17,66 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/pet")
-@CrossOrigin("4200")
-public class PetController {
-
-    private final PetService petService;
-
+@RequestMapping("/api/visit")
+public class VisitController {
+    private final VisitService visitService;
 
     @Autowired
-    public PetController(PetService petService) {
-        this.petService = petService;
-
+    public VisitController(VisitService visitService) {
+        this.visitService = visitService;
     }
-    @ApiOperation(value = "Save pet")
+    @ApiOperation(value = "Save visit")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PostMapping("/add")
-    public ResponseEntity<PetDtoResponse> create(@Valid @RequestBody PetDtoRequest petDtoRequest){
+    public ResponseEntity<VisitResponseDto> create(@Valid @RequestBody VisitRequestDto visitRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.create(petDtoRequest));
-
+                .body(visitService.create(visitRequestDto));
     }
-    @ApiOperation(value = "Update pet")
+    @ApiOperation(value = "Update visit")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<PetDtoResponse> update(@Valid @RequestBody PetDtoRequest petDtoRequest, @PathVariable Long id){
-        petDtoRequest.setId(id);
+    public ResponseEntity<VisitResponseDto> update(@Valid @RequestBody VisitRequestDto visitRequestDto, @PathVariable("id") long id){
+        visitRequestDto.setId(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(petService.update(petDtoRequest));
+                .body(visitService.update(visitRequestDto));
     }
-    @ApiOperation(value = "Return pet by id")
+    @ApiOperation(value = "Retrieve visit by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Pet> getById(@PathVariable("id") Long id){
+    public ResponseEntity<Visit> retrieveById(@PathVariable("id") long id){
         return ResponseEntity.status(HttpStatus.FOUND)
-                .body(petService.getById(id));
-    }
-    @ApiOperation(value = "Get all pets")
+                .body(visitService.getById(id));
+    } @ApiOperation(value = "Get all visits")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping
-    public List<PetDtoResponse> getAll(){
-        return petService.getAll();
+    public List<VisitResponseDto> getAll(){
+        return visitService.getAll();
     }
-    @ApiOperation(value = "Delete pet")
+    @ApiOperation(value = "Delete visit by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id){
-        this.petService.delete(id);
+    public void delete(@PathVariable("id") long id){
+        visitService.delete(id);
     }
+
 }
