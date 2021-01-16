@@ -1,4 +1,4 @@
-package com.bov.petclinic.dto;
+package com.bov.petclinic.dto.specialty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.bov.petclinic.service;
 
-import com.bov.petclinic.dto.VeterinarianRequestDto;
-import com.bov.petclinic.dto.VeterinarianResponseDto;
+import com.bov.petclinic.dto.veterinarian.VeterinarianRequestDto;
+import com.bov.petclinic.dto.veterinarian.VeterinarianResponseDto;
 import com.bov.petclinic.entity.Veterinarian;
 import org.springframework.stereotype.Service;
 

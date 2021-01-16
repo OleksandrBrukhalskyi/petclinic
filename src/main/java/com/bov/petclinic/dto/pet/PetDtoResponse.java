@@ -1,5 +1,6 @@
-package com.bov.petclinic.dto;
+package com.bov.petclinic.dto.pet;
 
+import com.bov.petclinic.dto.owner.OwnerDto;
 import lombok.*;
 
 import java.time.LocalDate;
