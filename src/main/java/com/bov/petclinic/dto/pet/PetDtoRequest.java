@@ -1,4 +1,4 @@
-package com.bov.petclinic.dto;
+package com.bov.petclinic.dto.pet;
 
 import lombok.*;
 import java.time.LocalDate;

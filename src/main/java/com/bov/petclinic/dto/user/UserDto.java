@@ -1,4 +1,4 @@
-package com.bov.petclinic.dto;
+package com.bov.petclinic.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

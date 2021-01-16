@@ -1,7 +1,7 @@
 package com.bov.petclinic.controller;
 
 import com.bov.petclinic.constant.HttpStatuses;
-import com.bov.petclinic.dto.OwnerDto;
+import com.bov.petclinic.dto.owner.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.service.OwnerService;
 import io.swagger.annotations.ApiOperation;

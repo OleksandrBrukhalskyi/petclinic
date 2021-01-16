@@ -1,6 +1,6 @@
 package com.bov.petclinic.service.impls;
 
-import com.bov.petclinic.dto.UserDto;
+import com.bov.petclinic.dto.user.UserDto;
 import com.bov.petclinic.entity.Role;
 import com.bov.petclinic.entity.User;
 import com.bov.petclinic.exceptions.BadIdException;

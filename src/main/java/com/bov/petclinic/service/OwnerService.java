@@ -1,6 +1,6 @@
 package com.bov.petclinic.service;
 
-import com.bov.petclinic.dto.OwnerDto;
+import com.bov.petclinic.dto.owner.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import org.springframework.stereotype.Service;
 

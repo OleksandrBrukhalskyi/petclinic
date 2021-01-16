@@ -1,7 +1,7 @@
 package com.bov.petclinic.service.impls;
 
-import com.bov.petclinic.dto.VeterinarianRequestDto;
-import com.bov.petclinic.dto.VeterinarianResponseDto;
+import com.bov.petclinic.dto.veterinarian.VeterinarianRequestDto;
+import com.bov.petclinic.dto.veterinarian.VeterinarianResponseDto;
 import com.bov.petclinic.entity.Specialty;
 import com.bov.petclinic.entity.Veterinarian;
 import com.bov.petclinic.exceptions.BadIdException;

@@ -1,8 +1,8 @@
 package com.bov.petclinic.controller;
 
 import com.bov.petclinic.constant.HttpStatuses;
-import com.bov.petclinic.dto.VisitRequestDto;
-import com.bov.petclinic.dto.VisitResponseDto;
+import com.bov.petclinic.dto.visit.VisitRequestDto;
+import com.bov.petclinic.dto.visit.VisitResponseDto;
 import com.bov.petclinic.entity.Visit;
 import com.bov.petclinic.service.VisitService;
 import io.swagger.annotations.ApiOperation;

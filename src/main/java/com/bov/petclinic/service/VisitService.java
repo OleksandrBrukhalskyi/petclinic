@@ -1,7 +1,7 @@
 package com.bov.petclinic.service;
 
-import com.bov.petclinic.dto.VisitRequestDto;
-import com.bov.petclinic.dto.VisitResponseDto;
+import com.bov.petclinic.dto.visit.VisitRequestDto;
+import com.bov.petclinic.dto.visit.VisitResponseDto;
 import com.bov.petclinic.entity.Visit;
 import org.springframework.stereotype.Service;
 

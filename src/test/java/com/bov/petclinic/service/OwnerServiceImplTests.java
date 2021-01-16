@@ -1,6 +1,6 @@
 package com.bov.petclinic.service;
 
-import com.bov.petclinic.dto.OwnerDto;
+import com.bov.petclinic.dto.owner.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.repository.OwnerRepository;
 import com.bov.petclinic.service.impls.OwnerServiceImpl;
@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
