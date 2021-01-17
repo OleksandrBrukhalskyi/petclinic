@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             log.error(e.getMessage());
         }
-        log.info("User [" + toSave + "] created ");
+        log.info("User [" + toSave.getLogin() + "] created ");
         return modelMapper.map(toSave,UserDto.class);
     }
 
