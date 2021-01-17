@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             log.error(e.getMessage());
         }
-        log.info("User [" + toSave + "] created ");
+        log.info("User [" + toSave.getLogin() + "] created ");
         return modelMapper.map(toSave,UserDto.class);
     }
 
@@ -96,5 +96,21 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    @Override
+    public User findByLoginAndPassword(String login, String password) {
+        User user = findByLogin(login);
+        if(user != null){
+            if(passwordEncoder.matches(password,user.getPassword())){
+                return user;
+            }
+        }
+        return null;
     }
 }

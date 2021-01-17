@@ -11,4 +11,6 @@ public interface UserService {
     UserDto getById(long id);
     void delete(long id);
     List<UserDto> getAll();
+    User findByLogin(String login);
+    User findByLoginAndPassword(String login,String password);
 }
