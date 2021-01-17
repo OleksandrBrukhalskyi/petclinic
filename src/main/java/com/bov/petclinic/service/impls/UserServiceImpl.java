@@ -97,4 +97,20 @@ public class UserServiceImpl implements UserService {
                 .map(user -> modelMapper.map(user,UserDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    @Override
+    public User findByLoginAndPassword(String login, String password) {
+        User user = findByLogin(login);
+        if(user != null){
+            if(passwordEncoder.matches(password,user.getPassword())){
+                return user;
+            }
+        }
+        return null;
+    }
 }
