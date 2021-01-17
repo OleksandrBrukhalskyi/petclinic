@@ -13,7 +13,7 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-    private CustomUserDetails fromUserEntityToCustomUserDetails(User user){
+    public static CustomUserDetails fromUserEntityToCustomUserDetails(User user){
         CustomUserDetails customUserDetails = new CustomUserDetails();
         customUserDetails.login = user.getLogin();
         customUserDetails.password = user.getPassword();
