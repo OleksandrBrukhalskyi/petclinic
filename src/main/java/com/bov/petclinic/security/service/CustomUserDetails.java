@@ -1,4 +1,4 @@
-package com.bov.petclinic.security;
+package com.bov.petclinic.security.service;
 
 import com.bov.petclinic.entity.User;
 import org.springframework.security.core.GrantedAuthority;
