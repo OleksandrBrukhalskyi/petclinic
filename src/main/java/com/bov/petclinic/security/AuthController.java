@@ -27,6 +27,9 @@ public class AuthController {
     }
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody AuthRequest authRequest){
+        if(userService.existsByLogin(authRequest.getLogin())){
+            return new ResponseEntity<>(new ApiResponse(false,"Login is already taken"),HttpStatus.BAD_REQUEST);
+        }
         User user = new User();
         user.setLogin(authRequest.getLogin());
         user.setPassword(authRequest.getPassword());
