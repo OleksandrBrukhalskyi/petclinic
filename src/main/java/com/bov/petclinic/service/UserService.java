@@ -13,4 +13,5 @@ public interface UserService {
     List<UserDto> getAll();
     User findByLogin(String login);
     User findByLoginAndPassword(String login,String password);
+    Boolean existsByLogin(String login);
 }
