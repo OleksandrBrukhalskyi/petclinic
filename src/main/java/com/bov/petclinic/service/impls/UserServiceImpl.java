@@ -113,4 +113,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Boolean existsByLogin(String login) {
+        return userRepository.existsByLogin(login);
+    }
 }
