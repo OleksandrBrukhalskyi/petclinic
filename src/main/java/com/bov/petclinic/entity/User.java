@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.time.Instant;
 
 @Entity
 @AllArgsConstructor
@@ -38,6 +39,8 @@ public class User {
     @Min(8)
     @Max(30)
     private String password;
+    private Instant created;
+    private boolean isEnabled;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
