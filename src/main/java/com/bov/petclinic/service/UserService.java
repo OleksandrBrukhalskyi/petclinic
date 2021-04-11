@@ -1,12 +1,13 @@
 package com.bov.petclinic.service;
 
+import com.bov.petclinic.dto.RegisterRequest;
 import com.bov.petclinic.dto.user.UserDto;
 import com.bov.petclinic.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    UserDto create(User user);
+    void create(RegisterRequest registerRequest);
     UserDto update(User user);
     UserDto getById(long id);
     void delete(long id);
