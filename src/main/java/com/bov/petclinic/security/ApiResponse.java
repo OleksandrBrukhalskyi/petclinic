@@ -7,11 +7,11 @@ import lombok.Setter;
 
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class ApiResponse {
-    private boolean success;
-    private String message;
-}
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Getter
+//@Setter
+//public class ApiResponse {
+//    private boolean success;
+//    private String message;
+//}
