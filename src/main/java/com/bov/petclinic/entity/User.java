@@ -35,6 +35,8 @@ public class User {
     @Column(name = "email")
     @NotEmpty(message = "Email is required")
     private String email;
+    @Column(name = "login")
+    private String login;
     @Column(name = "password")
     @Min(8)
     @Max(30)
