@@ -18,11 +18,10 @@ import static java.util.Date.from;
 public class JwtProvider {
     @Value("$(jwt.secret)")
     private String jwtKey;
-    @Value("$(jwt.expiration.time)")
-    private long jwtExpirationInMillis;
+    @Value("${jwt.expiration.time}")
+    private Long jwtExpirationInMillis;
 
     public String generateTokenWithAuthentication(Authentication authentication){
-        //Date date = from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
         return Jwts.builder()
@@ -34,7 +33,6 @@ public class JwtProvider {
     }
 
     public String generateToken(String login){
-        //Date date = from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(login)
                 .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
@@ -65,7 +63,7 @@ public class JwtProvider {
         Claims claims = Jwts.parser().setSigningKey(jwtKey).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
-    public long getJwtExpirationInMillis(){
+    public Long getJwtExpirationInMillis(){
         return jwtExpirationInMillis;
     }
 }
