@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenService refreshTokenService;
 
+
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder, ModelMapper modelMapper,
@@ -101,7 +102,7 @@ public class UserServiceImpl implements UserService {
         return AuthResponse.builder()
                 .token(token)
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
-                .refreshToken(token)
+                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
                 .login(authRequest.getLogin())
                 .build();
     }
@@ -148,7 +149,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(User user) {
+    public UserDto update(UserDto user) {
         if(user == null){
             throw new NullPointerException("User can't be 'null'");
         }
