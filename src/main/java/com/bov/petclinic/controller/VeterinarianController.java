@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/veterinarian")
+@CrossOrigin(origins = "*")
 public class VeterinarianController {
     private final VeterinarianService veterinarianService;
 
