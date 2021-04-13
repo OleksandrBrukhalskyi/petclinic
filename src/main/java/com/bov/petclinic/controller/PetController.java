@@ -5,6 +5,7 @@ import com.bov.petclinic.dto.pet.PetDtoRequest;
 import com.bov.petclinic.dto.pet.PetDtoResponse;
 import com.bov.petclinic.entity.Pet;
 import com.bov.petclinic.service.PetService;
+import com.bov.petclinic.service.impls.PetServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -18,14 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pet")
-@CrossOrigin("4200")
+@CrossOrigin(origins = "*")
 public class PetController {
 
-    private final PetService petService;
+    private final PetServiceImpl petService;
 
 
     @Autowired
-    public PetController(PetService petService) {
+    public PetController(PetServiceImpl petService) {
         this.petService = petService;
 
     }
@@ -83,5 +84,10 @@ public class PetController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id){
         this.petService.delete(id);
+    }
+
+    @GetMapping("/quantity")
+    public long getQty(){
+        return petService.qtyOfPets();
     }
 }
