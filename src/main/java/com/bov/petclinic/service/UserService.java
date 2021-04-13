@@ -1,6 +1,6 @@
 package com.bov.petclinic.service;
 
-import com.bov.petclinic.dto.RegisterRequest;
+import com.bov.petclinic.security.RegisterRequest;
 import com.bov.petclinic.dto.user.UserDto;
 import com.bov.petclinic.entity.User;
 
