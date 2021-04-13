@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/specialty")
-@CrossOrigin("4200")
+@CrossOrigin(origins = "*")
 public class SpecialtyController {
     private final SpecialtyService specialtyService;
 
