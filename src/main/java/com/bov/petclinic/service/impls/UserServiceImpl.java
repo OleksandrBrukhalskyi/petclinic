@@ -1,7 +1,7 @@
 package com.bov.petclinic.service.impls;
 
-import com.bov.petclinic.dto.RefreshTokenRequest;
-import com.bov.petclinic.dto.RegisterRequest;
+import com.bov.petclinic.security.RefreshTokenRequest;
+import com.bov.petclinic.security.RegisterRequest;
 import com.bov.petclinic.dto.user.UserDto;
 import com.bov.petclinic.entity.NotificationEmail;
 import com.bov.petclinic.entity.Role;
