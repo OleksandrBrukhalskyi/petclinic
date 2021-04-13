@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -38,9 +39,8 @@ public class User {
     @Column(name = "login")
     private String login;
     @Column(name = "password")
-    @Min(8)
-    @Max(30)
     private String password;
+    @CreationTimestamp
     private Instant created;
     private boolean isEnabled;
     @ManyToOne
