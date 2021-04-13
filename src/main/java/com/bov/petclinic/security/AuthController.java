@@ -1,6 +1,5 @@
 package com.bov.petclinic.security;
 
-import com.bov.petclinic.dto.RegisterRequest;
 import com.bov.petclinic.security.jwt.JwtProvider;
 import com.bov.petclinic.service.impls.RefreshTokenService;
 import com.bov.petclinic.service.impls.UserServiceImpl;
@@ -14,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class AuthController {
     private final UserServiceImpl userService;
     private final JwtProvider jwtProvider;
@@ -35,10 +34,22 @@ public class AuthController {
         return new ResponseEntity<>("You have registered!",HttpStatus.CREATED);
 
     }
-    @PostMapping("/auth")
+    @PostMapping("/sign-in")
     public AuthResponse auth(@RequestBody AuthRequest authRequest){
-//        User user = userService.findByLoginAndPassword(authRequest.getLogin(),authRequest.getPassword());
-//        String token = jwtProvider.generateToken(user.getLogin());
         return userService.login(authRequest);
+    }
+    @PostMapping("/refresh/token")
+    public AuthResponse refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return userService.refreshToken(refreshTokenRequest);
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
+        return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!!");
+    }
+    @GetMapping("accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+        userService.verifyAccount(token);
+        return new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
     }
 }
