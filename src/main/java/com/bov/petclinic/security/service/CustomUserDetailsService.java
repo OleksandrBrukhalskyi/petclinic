@@ -16,10 +16,9 @@ import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserService userService;
-
+    private UserService userService;
     @Autowired
-    public CustomUserDetailsService(UserService userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -36,9 +35,5 @@ public class CustomUserDetailsService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(String role){
         return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
-//    @Override
-//    public CustomUserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-//        User user = userService.findByLogin(login);
-//        return CustomUserDetails.fromUserEntityToCustomUserDetails(user);
-//    }
+
 }
