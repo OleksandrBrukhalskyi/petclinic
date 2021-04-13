@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @NoArgsConstructor
 @RequestMapping("/api/owner")
-@CrossOrigin("4200")
+@CrossOrigin(origins = "*")
 public class OwnerController {
 
     private OwnerService ownerService;
