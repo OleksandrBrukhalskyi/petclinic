@@ -31,7 +31,7 @@ public class AuthController {
             return new ResponseEntity<>("Login is already taken",HttpStatus.BAD_REQUEST);
         }
         userService.create(registerRequest);
-        return new ResponseEntity<>("You have registered!",HttpStatus.CREATED);
+        return new ResponseEntity<>("You have registered! Confirmation email was sent to your email",HttpStatus.CREATED);
 
     }
     @PostMapping("/sign-in")
