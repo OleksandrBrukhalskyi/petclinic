@@ -4,6 +4,7 @@ import com.bov.petclinic.constant.HttpStatuses;
 import com.bov.petclinic.dto.owner.OwnerDto;
 import com.bov.petclinic.entity.Owner;
 import com.bov.petclinic.service.OwnerService;
+import com.bov.petclinic.service.impls.OwnerServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -22,10 +23,10 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class OwnerController {
 
-    private OwnerService ownerService;
+    private OwnerServiceImpl ownerService;
 
     @Autowired
-    public OwnerController(OwnerService ownerService) {
+    public OwnerController(OwnerServiceImpl ownerService) {
         this.ownerService = ownerService;
     }
 
@@ -88,6 +89,10 @@ public class OwnerController {
     public Long delete(@PathVariable("id") Long id){
         ownerService.delete(id);
         return id;
+    }
+    @GetMapping("/quantity")
+    public long quantityOfOwners(){
+        return ownerService.qtyOfOwners();
     }
 
 }
