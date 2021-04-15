@@ -69,7 +69,12 @@ public class UserServiceImpl implements UserService {
         if(registerRequest == null){
             throw new NullPointerException("User can't be 'null'");
         }
+        if(!roleRepository.existsByName("ROLE_USER")){
+            Role role = new Role("ROLE_USER");
+            roleRepository.save(role);
+        }
         Role role = roleRepository.findByName("ROLE_USER");
+        roleRepository.save(role);
         User toSave = new User();
         toSave.setSurname(registerRequest.getSurname());
         toSave.setFirstname(registerRequest.getFirstname());
