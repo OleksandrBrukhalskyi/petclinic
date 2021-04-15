@@ -5,6 +5,7 @@ import com.bov.petclinic.dto.visit.VisitRequestDto;
 import com.bov.petclinic.dto.visit.VisitResponseDto;
 import com.bov.petclinic.entity.Visit;
 import com.bov.petclinic.service.VisitService;
+import com.bov.petclinic.service.impls.VisitServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -15,15 +16,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/visit")
 @CrossOrigin(origins = "*")
 public class VisitController {
-    private final VisitService visitService;
+    private final VisitServiceImpl visitService;
 
     @Autowired
-    public VisitController(VisitService visitService) {
+    public VisitController(VisitServiceImpl visitService) {
         this.visitService = visitService;
     }
     @ApiOperation(value = "Save visit")
@@ -78,6 +80,11 @@ public class VisitController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") long id){
         visitService.delete(id);
+    }
+    @GetMapping("/stats")
+    public Map<String,Long> countingVisits(){
+        return visitService.groupVisitsByCounts();
+
     }
 
 }
