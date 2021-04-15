@@ -1,19 +1,17 @@
 package com.bov.petclinic.security;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.Instant;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class AuthResponse {
-    private String token;
-    private String refreshToken;
-    private Instant expiresAt;
+public class RegisterRequest {
+    private String surname;
+    private String firstname;
+    private String patronymic;
+    private String email;
     private String login;
+    private String password;
 }

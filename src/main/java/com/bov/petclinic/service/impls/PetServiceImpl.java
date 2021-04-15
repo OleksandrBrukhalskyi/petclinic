@@ -31,6 +31,8 @@ public class PetServiceImpl implements PetService {
         this.ownerService = ownerService;
     }
 
+    public PetServiceImpl() {
+    }
 
     @Override
     public PetDtoResponse create(PetDtoRequest petDtoRequest) {
@@ -101,5 +103,8 @@ public class PetServiceImpl implements PetService {
               .stream()
               .map(pet -> modelMapper.map(pet,PetDtoResponse.class))
               .collect(Collectors.toList());
+    }
+    public long qtyOfPets(){
+        return petRepository.findAll().stream().count();
     }
 }

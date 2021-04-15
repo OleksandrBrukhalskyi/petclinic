@@ -3,6 +3,7 @@ package com.bov.petclinic.service.impls;
 import com.bov.petclinic.dto.visit.VisitRequestDto;
 import com.bov.petclinic.dto.visit.VisitResponseDto;
 import com.bov.petclinic.entity.Pet;
+import com.bov.petclinic.entity.ServicePrice;
 import com.bov.petclinic.entity.Visit;
 import com.bov.petclinic.exceptions.BadIdException;
 import com.bov.petclinic.repository.VisitRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,12 +25,14 @@ public class VisitServiceImpl implements VisitService {
     private final VisitRepository visitRepository;
     private final ModelMapper modelMapper;
     private final PetService petService;
+    private final ServicePriceServiceImpl priceService;
 
     @Autowired
-    public VisitServiceImpl(VisitRepository visitRepository, ModelMapper modelMapper, PetService petService) {
+    public VisitServiceImpl(VisitRepository visitRepository, ModelMapper modelMapper, PetService petService, ServicePriceServiceImpl priceService) {
         this.visitRepository = visitRepository;
         this.modelMapper = modelMapper;
         this.petService = petService;
+        this.priceService = priceService;
     }
 
     @Override
@@ -37,9 +41,11 @@ public class VisitServiceImpl implements VisitService {
             throw new NullPointerException("Visit is null");
         }
         Pet pet = petService.getById(visitRequestDto.getPet());
+        ServicePrice servicePrice = priceService.getById(visitRequestDto.getPrice());
         Visit toSave = modelMapper.map(visitRequestDto,Visit.class);
         toSave.setVisitDate(visitRequestDto.getVisitDate());
         toSave.setGoalOfVisit(visitRequestDto.getGoalOfVisit());
+        toSave.setPrice(servicePrice);
         toSave.setPet(pet);
         try{
             visitRepository.save(toSave);
@@ -57,9 +63,11 @@ public class VisitServiceImpl implements VisitService {
             throw new NullPointerException("Visit is null");
         }
         Pet pet = petService.getById(visitRequestDto.getPet());
+        ServicePrice servicePrice = priceService.getById(visitRequestDto.getPrice());
         Visit toUpdate = modelMapper.map(visitRequestDto,Visit.class);
         toUpdate.setGoalOfVisit(visitRequestDto.getGoalOfVisit());
         toUpdate.setVisitDate(visitRequestDto.getVisitDate());
+        toUpdate.setPrice(servicePrice);
         toUpdate.setPet(pet);
         try{
             visitRepository.save(toUpdate);
@@ -74,11 +82,8 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public Visit getById(long id) {
         log.info("Using 'getById' method for retrieving record from DB");
-        Optional<Visit> visit = visitRepository.findById(id);
-        if(visit.isPresent()){
-            return visit.get();
-        }
-        throw new BadIdException("Visit with id " + id + " not found");
+        return visitRepository.findById(id).get();
+
 
     }
 
@@ -100,5 +105,12 @@ public class VisitServiceImpl implements VisitService {
                 .stream()
                 .map(visit -> modelMapper.map(visit,VisitResponseDto.class))
                 .collect(Collectors.toList());
+    }
+    public Map<String, Long> groupVisitsByCounts(){
+        List<Visit> visits =  visitRepository.findAll();
+        Map<String,Long> counting = visits.stream()
+                .collect(Collectors.groupingBy(Visit::getGoalOfVisit,Collectors.counting()));
+        return counting;
+
     }
 }

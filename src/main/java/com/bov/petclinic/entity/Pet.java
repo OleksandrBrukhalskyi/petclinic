@@ -28,4 +28,4 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     @JsonBackReference
     private Owner owner;
-}
+}   

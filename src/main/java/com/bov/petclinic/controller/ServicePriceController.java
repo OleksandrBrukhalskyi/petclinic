@@ -1,8 +1,9 @@
 package com.bov.petclinic.controller;
 
 import com.bov.petclinic.constant.HttpStatuses;
-import com.bov.petclinic.entity.Specialty;
-import com.bov.petclinic.service.SpecialtyService;
+import com.bov.petclinic.dto.ServicePriceDto;
+import com.bov.petclinic.entity.ServicePrice;
+import com.bov.petclinic.service.impls.ServicePriceServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -13,65 +14,67 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/specialty")
+@RequestMapping("/api/price")
 @CrossOrigin(origins = "*")
-public class SpecialtyController {
-    private final SpecialtyService specialtyService;
-
+public class ServicePriceController {
     @Autowired
-    public SpecialtyController(SpecialtyService specialtyService) {
-        this.specialtyService = specialtyService;
-    }
-    @ApiOperation(value = "Save specialty")
+    private ServicePriceServiceImpl priceService;
+
+    @ApiOperation(value = "Add price")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PostMapping("/add")
-    public ResponseEntity<Specialty> create(@Valid @RequestBody Specialty specialty){
+    public ResponseEntity<ServicePrice> add(@Valid @RequestBody ServicePrice servicePrice){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(specialtyService.create(specialty));
+                .body(priceService.create(servicePrice));
     }
-    @ApiOperation(value = "Update specialty")
+
+    @ApiOperation(value = "Update price")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Specialty> update(@Valid @RequestBody Specialty specialty, @PathVariable("id") Long id){
-        Specialty returnedSpecialtyById = specialtyService.getById(id);
-        returnedSpecialtyById.setName(specialty.getName());
+    public ResponseEntity<ServicePrice> updatePrice(@Valid @RequestBody ServicePrice servicePrice, @PathVariable("id") long id){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(specialtyService.update(returnedSpecialtyById));
+                .body(priceService.update(servicePrice));
     }
-    @ApiOperation(value = "Return specialty by id")
+    @ApiOperation(value = "Return service price  by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Specialty> getById(@PathVariable("id") Long id){
+    public ResponseEntity<ServicePrice> getPriceServiceById(@PathVariable("id") long id){
         return ResponseEntity.status(HttpStatus.FOUND)
-                .body(specialtyService.getById(id));
+                .body(priceService.getById(id));
     }
-    @ApiOperation(value = "Get all specialties")
+    @ApiOperation(value = "Get all prices")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = HttpStatuses.OK),
             @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
             @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
     })
     @GetMapping
-    public List<Specialty> getAll(){
-        return specialtyService.getAll();
+    public List<ServicePriceDto> getAllPrices(){
+        return priceService.getAll();
     }
+    @ApiOperation(value = "Delete  service price  by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = HttpStatuses.OK),
+            @ApiResponse(code = 400, message = HttpStatuses.BAD_REQUEST),
+            @ApiResponse(code = 403, message = HttpStatuses.FORBIDDEN)
+    })
     @DeleteMapping("/{id}")
-    public Long delete(@PathVariable("id") Long id){
-        specialtyService.delete(id);
-        return id;
+    void deleteServicePrice(@PathVariable("id") long id){
+        priceService.deleteById(id);
     }
 }
