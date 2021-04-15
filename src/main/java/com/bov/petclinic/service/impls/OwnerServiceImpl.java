@@ -61,4 +61,9 @@ public class OwnerServiceImpl implements OwnerService {
                 .map(owner -> modelMapper.map(owner,OwnerDto.class))
                 .collect(Collectors.toList());
     }
+    public long qtyOfOwners(){
+        return ownerRepository.findAll()
+                .stream()
+                .count();
+    }
 }
