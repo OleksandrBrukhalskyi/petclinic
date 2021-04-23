@@ -1,4 +1,4 @@
-Frontend application: https://github.com/OleksandrBrukhalskyi/petclinic-angular
+Frontend application: https://github.com/OleksandrBrukhalskyi/petclinic-client
 
 SonarCloud: https://sonarcloud.io/dashboard?id=OleksandrBrukhalskyi_petclinic
 
